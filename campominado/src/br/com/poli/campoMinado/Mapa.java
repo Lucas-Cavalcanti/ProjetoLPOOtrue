@@ -6,7 +6,7 @@ public class Mapa {
 	
 	//ATRIBUTOS
 	
-	private int[][] mapa;
+	private int[][] campo;
 	
 	private Dificuldade dificuldade;
 	
@@ -21,7 +21,7 @@ public class Mapa {
 			this.dificuldade = Dificuldade.DIFICIL;
 		}
 		
-		this.mapa = new int[this.dificuldade.getValor()][this.dificuldade.getValor()];
+		this.campo = new int[this.dificuldade.getValor()][this.dificuldade.getValor()];
 		
 		inicializaCampo();
 		
@@ -41,28 +41,27 @@ public class Mapa {
 			
 			do {
 				
-				linha = geraBomba.nextInt(mapa.length);
-				coluna = geraBomba.nextInt(mapa.length);
+				linha = geraBomba.nextInt(campo.length);
+				coluna = geraBomba.nextInt(campo.length);
 				
 			}
+			while( campo[linha][coluna] == -1 );
 			
-			while( mapa[linha][coluna] == -1 );
-			
-			mapa[linha][coluna] = -1;
+			campo[linha][coluna] = -1;
 		}
-		}
+	}
 		
 	
 	public void imprimeTela() {
 		
-		for (int i = 0; i < mapa.length; i++) {
+		for (int i = 0; i < campo.length; i++) {
 			System.out.println();
 			System.out.println();
-			for (int j = 0; j < mapa.length; j++) {
-				if(mapa[i][j] == 0)
-					System.out.print(" " + mapa[i][j]);
+			for (int j = 0; j < campo.length; j++) {
+				if(campo[i][j] == 0)
+					System.out.print(" " + campo[i][j]);
 				else
-					System.out.print(mapa[i][j]);
+					System.out.print(campo[i][j]);
 				System.out.print("  ");
 		
 			} 
@@ -70,12 +69,12 @@ public class Mapa {
 		}
 	}
 
-	public int[][] getMapa() {
-		return mapa;
+	public int[][] getcampo() {
+		return campo;
 	}
 
-	public void setMapa(int[][] mapa) {
-		this.mapa = mapa;
+	public void setcampo(int[][] campo) {
+		this.campo = campo;
 	}
 
 	public Dificuldade getDificuldade() {
