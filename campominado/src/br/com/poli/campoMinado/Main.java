@@ -7,7 +7,17 @@ public class Main {
 		CampoMinado c1 = new CampoMinado(Dificuldade.FACIL , "Lucas"); //CRIAR CAMPOMINADO
 		
 		
-		System.out.println(c1.getJogador().getNome()); //CHECAR SE JOGADOR FOI PREENCHIDO
+		
+		System.out.println();
+		
+		System.out.println();
+		
+		System.out.println("Matriz maior");
+		
+		
+		
+		
+		CampoMinado c2 = new CampoMinado(Dificuldade.DIFICIL , "Arthur");
 
 	}
 
