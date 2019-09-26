@@ -15,6 +15,7 @@ public class Main {
 		System.out.println("Matriz maior");
 		
 		
+		System.out.println();
 		
 		
 		CampoMinado c2 = new CampoMinado(Dificuldade.DIFICIL , "Arthur");
