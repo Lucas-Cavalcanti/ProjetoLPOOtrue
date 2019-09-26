@@ -12,8 +12,8 @@ public class CampoMinado {
 	
 	//CONSTRUTOR
 	
-	public CampoMinado(Dificuldade difi , String jogador){
-		this.dificuldade = difi;
+	public CampoMinado(Dificuldade dif , String jogador){
+		this.dificuldade = dif;
 		
 		this.mapa = new Mapa(this.dificuldade);
 		
