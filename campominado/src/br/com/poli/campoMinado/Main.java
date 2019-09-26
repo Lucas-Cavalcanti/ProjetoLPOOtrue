@@ -8,6 +8,7 @@ public class Main {
 		
 		CampoMinado c1 = new CampoMinado(Dificuldade.FACIL , "Lucas"); //CRIAR CAMPOMINADO FACIL
 		
+
 		System.out.println(c1.getJogador().getNome()); //CHECAR SE JOGADOR 1 FOI PREENCHIDO
 		
 		CampoMinado c2 = new CampoMinado(Dificuldade.DIFICIL , "Arthur"); //CRIAR CAMPOMINADO DIFICIL
