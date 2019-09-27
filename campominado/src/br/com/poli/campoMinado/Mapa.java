@@ -49,6 +49,8 @@ public class Mapa {
 			//SE NA POSIÇÃO SORTEADA JÁ HOUVER UM -1, O PROCESSO SERA REPETIDO PARA GARANTIR QUE HAJA 10 BOMBAS
 			
 			campo[linha][coluna] = -1;
+			
+			
 		}
 	}
 		
