@@ -21,7 +21,7 @@ public class Mapa {
 			this.dificuldade = Dificuldade.DIFICIL;
 		}
 		
-		this.campo = new int[this.dificuldade.getValor()][this.dificuldade.getValor()];
+		this.campo = new int[this.dificuldade.getValor()][this.dificuldade.getValor()]; //DEFININDO TAMANHO DO ARRAY CAMPO
 		
 		inicializaCampo();
 		
@@ -45,7 +45,8 @@ public class Mapa {
 				coluna = geraBomba.nextInt(campo.length);
 				
 			}
-			while( campo[linha][coluna] == -1 );
+			while( campo[linha][coluna] == -1 ); 
+			//SE NA POSIÇÃO SORTEADA JÁ HOUVER UM -1, O PROCESSO SERA REPETIDO PARA GARANTIR QUE HAJA 10 BOMBAS
 			
 			campo[linha][coluna] = -1;
 		}

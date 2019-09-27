@@ -6,11 +6,11 @@ public class Main {
 		
 		//TESTES 
 		
-		CampoMinado c1 = new CampoMinado(Dificuldade.FACIL , "Lucas"); //CRIAR CAMPOMINADO FACIL
+		CampoMinado c1 = new CampoMinado(Dificuldade.FACIL , "Lucas"); //CRIAR CAMPO MINADO FACIL
 		
 		System.out.println(c1.getJogador().getNome()); //CHECAR SE JOGADOR 1 FOI PREENCHIDO
 		
-		CampoMinado c2 = new CampoMinado(Dificuldade.DIFICIL , "Arthur"); //CRIAR CAMPOMINADO DIFICIL
+		CampoMinado c2 = new CampoMinado(Dificuldade.DIFICIL , "Arthur"); //CRIAR CAMPO MINADO DIFICIL
 		 
 		System.out.println(c2.getJogador().getNome()); //CHECAR SE JOGADOR 2 FOI PREENCHIDO
 
