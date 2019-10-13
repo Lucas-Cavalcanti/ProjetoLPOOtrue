@@ -4,9 +4,7 @@ import br.com.poli.campoMinado.*;
 
 import java.util.Random;
 
-import br.com.poli.campoMinado.Dificuldade;
-
-public class Mapa {
+public abstract class Mapa {
 	
 	//ATRIBUTOS
 	
@@ -47,13 +45,13 @@ public class Mapa {
 			}
 		}
 	}
-		
-	public void distribuirBombas(int numBombas) {
+	
+	public void distribuirBombas(int bombas) {
 		Random geraBomba = new Random();
 		int linha = 0;
 		int coluna = 0;
 		
-		for (int i = 0; i < numBombas ; i++) {
+		for (int i = 0; i < bombas ; i++) {
 			
 			do {
 				
@@ -79,9 +77,9 @@ public class Mapa {
 			System.out.println();
 			for (int j = 0; j < campo.length; j++) {
 				if(campo[i][j].isBandeira() == false)
-					System.out.print(" " + campo[i][j]);
+					System.out.print(" 0");
 				else
-					System.out.print(campo[i][j]);
+					System.out.print("-1");
 				System.out.print("  ");
 		
 			} 

@@ -17,6 +17,8 @@ public class CampoMinado {
 	public CampoMinado(Dificuldade dificuldade , String jogador){
 		this.dificuldade = dificuldade;
 		
+		this.jogador = new Jogador(jogador);
+		
 		if(dificuldade == Dificuldade.FACIL) {
 			this.mapa = new MapaFacil(this.dificuldade);
 		}
@@ -26,7 +28,6 @@ public class CampoMinado {
 		else {
 			this.mapa = new MapaDificil(this.dificuldade);
 		}
-		this.jogador = new Jogador(jogador);
 		
 	}
 
