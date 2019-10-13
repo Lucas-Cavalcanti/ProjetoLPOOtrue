@@ -1,5 +1,7 @@
 package br.com.poli.campoMinado;
 
+import br.com.poli.campoMinado.mapa.*;
+
 public class CampoMinado {
 	
 	//ATRIBUTOS
@@ -15,8 +17,15 @@ public class CampoMinado {
 	public CampoMinado(Dificuldade dificuldade , String jogador){
 		this.dificuldade = dificuldade;
 		
-		this.mapa = new Mapa(this.dificuldade);
-		
+		if(dificuldade == Dificuldade.FACIL) {
+			this.mapa = new MapaFacil(this.dificuldade);
+		}
+		else if (dificuldade == Dificuldade.MEDIO) {
+			this.mapa = new MapaMedio(this.dificuldade);
+		}
+		else {
+			this.mapa = new MapaDificil(this.dificuldade);
+		}
 		this.jogador = new Jogador(jogador);
 		
 	}

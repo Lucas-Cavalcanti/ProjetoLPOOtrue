@@ -4,7 +4,7 @@ public enum Dificuldade {
 	
 	//ENUM
 	
-	FACIL(9),DIFICIL(16);
+	FACIL(9),MEDIO(16),DIFICIL(32);
 	
 	//ATRIBUTO
 	

@@ -1,12 +1,16 @@
-package br.com.poli.campoMinado;
+package br.com.poli.campoMinado.mapa;
+
+import br.com.poli.campoMinado.*;
 
 import java.util.Random;
+
+import br.com.poli.campoMinado.Dificuldade;
 
 public class Mapa {
 	
 	//ATRIBUTOS
 	
-	private int[][] campo;
+	private Celula[][] campo;
 	
 	private Dificuldade dificuldade;
 	
@@ -17,13 +21,18 @@ public class Mapa {
 		if(dificuldade == Dificuldade.FACIL) {
 			this.dificuldade = Dificuldade.FACIL;
 		}
+		else if(dificuldade == Dificuldade.MEDIO) {
+			this.dificuldade = Dificuldade.MEDIO;
+		}
 		else {
 			this.dificuldade = Dificuldade.DIFICIL;
 		}
 		
-		this.campo = new int[this.dificuldade.getValor()][this.dificuldade.getValor()]; //DEFININDO TAMANHO DO ARRAY CAMPO
+		this.campo = new Celula[this.dificuldade.getValor()][this.dificuldade.getValor()]; //DEFININDO TAMANHO DO ARRAY CAMPO
 		
-		inicializaCampo();
+		inicializaCelulas();
+		
+		distribuirBombas(10);
 		
 		imprimeTela();
 	
@@ -31,11 +40,18 @@ public class Mapa {
 	
 	//MÉTODOS
 	
-	public void inicializaCampo() {
+	public void inicializaCelulas() {
+		for (int i = 0; i < campo.length; i++) {
+			for (int j = 0; j < campo.length; j++) {
+				campo[i][j].setBandeira(false);
+			}
+		}
+	}
+		
+	public void distribuirBombas(int numBombas) {
 		Random geraBomba = new Random();
 		int linha = 0;
 		int coluna = 0;
-		int numBombas = 10;
 		
 		for (int i = 0; i < numBombas ; i++) {
 			
@@ -45,15 +61,16 @@ public class Mapa {
 				coluna = geraBomba.nextInt(campo.length);
 				
 			}
-			while( campo[linha][coluna] == -1 ); 
+			while(campo[linha][coluna].isBandeira() == true ); 
 			//SE NA POSIÇÃO SORTEADA JÁ HOUVER UM -1, O PROCESSO SERA REPETIDO PARA GARANTIR QUE HAJA 10 BOMBAS
 			
-			campo[linha][coluna] = -1;
+			campo[linha][coluna].setBandeira(true);
 			
 			
 		}
 	}
-		
+	
+	
 	
 	public void imprimeTela() {
 		
@@ -61,7 +78,7 @@ public class Mapa {
 			System.out.println();
 			System.out.println();
 			for (int j = 0; j < campo.length; j++) {
-				if(campo[i][j] == 0)
+				if(campo[i][j].isBandeira() == false)
 					System.out.print(" " + campo[i][j]);
 				else
 					System.out.print(campo[i][j]);
@@ -72,11 +89,11 @@ public class Mapa {
 		}
 	}
 
-	public int[][] getcampo() {
+	public Celula[][] getCampo() {
 		return campo;
 	}
 
-	public void setcampo(int[][] campo) {
+	public void setCampo(Celula[][] campo) {
 		this.campo = campo;
 	}
 
@@ -87,7 +104,7 @@ public class Mapa {
 	public void setDificuldade(Dificuldade dificuldade) {
 		this.dificuldade = dificuldade;
 	}
-	
+
 	
 }
 
