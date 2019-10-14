@@ -6,6 +6,13 @@ public class Celula {
 	private int qtdBombasVizinhas;
 	private boolean visivel;
 	
+	public Celula(boolean bandeira, boolean bomba, boolean visivel, int qtdBombasVizinhas) {
+		this.bandeira = bandeira;
+		this.bomba = bomba;
+		this.qtdBombasVizinhas = qtdBombasVizinhas;
+		this.visivel = visivel;
+	}
+	
 	public boolean isBandeira() {
 		return bandeira;
 	}

@@ -20,13 +20,13 @@ public class CampoMinado {
 		this.jogador = new Jogador(jogador);
 		
 		if(dificuldade == Dificuldade.FACIL) {
-			this.mapa = new MapaFacil(this.dificuldade);
+			this.mapa = new MapaFacil();
 		}
 		else if (dificuldade == Dificuldade.MEDIO) {
-			this.mapa = new MapaMedio(this.dificuldade);
+			this.mapa = new MapaMedio();
 		}
 		else {
-			this.mapa = new MapaDificil(this.dificuldade);
+			this.mapa = new MapaDificil();
 		}
 		
 	}

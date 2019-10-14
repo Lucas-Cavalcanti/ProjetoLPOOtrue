@@ -4,8 +4,11 @@ import br.com.poli.campoMinado.Dificuldade;
 
 public class MapaDificil extends Mapa {
 
-	public MapaDificil(Dificuldade dificuldade) {
-		super(dificuldade);
+	private static Dificuldade dificuldade = Dificuldade.DIFICIL;
+	private static int bombas = 99;
+	
+	public MapaDificil() {
+		super(dificuldade,bombas);
 		
 	}
 

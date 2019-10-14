@@ -12,28 +12,22 @@ public abstract class Mapa {
 	
 	private Dificuldade dificuldade;
 	
+	private int bombas;
+	
 	//CONSTRUTOR
 	
-	public Mapa(Dificuldade dificuldade) {
+	public Mapa(Dificuldade dificuldade,int bombas) {
 		
-		if(dificuldade == Dificuldade.FACIL) {
-			this.dificuldade = Dificuldade.FACIL;
-		}
-		else if(dificuldade == Dificuldade.MEDIO) {
-			this.dificuldade = Dificuldade.MEDIO;
-		}
-		else {
-			this.dificuldade = Dificuldade.DIFICIL;
-		}
-		
+		this.bombas = bombas;
+		this.dificuldade = dificuldade;
 		this.campo = new Celula[this.dificuldade.getValor()][this.dificuldade.getValor()]; //DEFININDO TAMANHO DO ARRAY CAMPO
 		
 		inicializaCelulas();
-		
-		distribuirBombas(10);
+			
+		distribuirBombas(bombas);
 		
 		imprimeTela();
-	
+		
 	}
 	
 	//MÉTODOS
@@ -41,7 +35,7 @@ public abstract class Mapa {
 	public void inicializaCelulas() {
 		for (int i = 0; i < campo.length; i++) {
 			for (int j = 0; j < campo.length; j++) {
-				campo[i][j].setBandeira(false);
+				campo[i][j] = new Celula(false,false,false,0);
 			}
 		}
 	}
@@ -59,10 +53,10 @@ public abstract class Mapa {
 				coluna = geraBomba.nextInt(campo.length);
 				
 			}
-			while(campo[linha][coluna].isBandeira() == true ); 
-			//SE NA POSIÇÃO SORTEADA JÁ HOUVER UM -1, O PROCESSO SERA REPETIDO PARA GARANTIR QUE HAJA 10 BOMBAS
+			while(campo[linha][coluna].isBomba() == true ); 
+			//SE NA POSIÇÃO SORTEADA JÁ HOUVER UM A BOMBA (-1), O PROCESSO SERA REPETIDO PARA GARANTIR QUE HAJA 10 BOMBAS
 			
-			campo[linha][coluna].setBandeira(true);
+			campo[linha][coluna].setBomba(true);
 			
 			
 		}
@@ -76,17 +70,32 @@ public abstract class Mapa {
 			System.out.println();
 			System.out.println();
 			for (int j = 0; j < campo.length; j++) {
-				if(campo[i][j].isBandeira() == false)
-					System.out.print(" 0");
+				if(campo[i][j].isBomba() == false)
+					System.out.print(" " + campo[i][j].getQtdBombasVizinhas());
 				else
 					System.out.print("-1");
 				System.out.print("  ");
 		
 			} 
-			
 		}
 	}
-
+	
+	public void contarBombas() {
+		for (int i = 0; i < campo.length; i++) {
+			for (int j = 0; j < campo.length; j++) {
+				if (campo[i][j].isBomba()==false) {
+					for (int i2 = (i-1); i2 <= (i+1); i2++) {
+						for (int j2 = (j-1); j2 <= (j+1); j2++) {
+							if(campo[i2][j2].isBomba() == true) {
+								campo[i][j].setQtdBombasVizinhas(campo[i][j].getQtdBombasVizinhas() + 1);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	public Celula[][] getCampo() {
 		return campo;
 	}
