@@ -107,7 +107,7 @@ public abstract class Mapa {
 				if (campo[i][j].isBomba()==false) {
 					for (int i2 = (i-1); i2 <= (i+1); i2++) {
 						for (int j2 = (j-1); j2 <= (j+1); j2++) {
-							if (i2>0 && j2>0 && i2<campo.length && j2<campo.length) {
+							if (i2>=0 && j2>=0 && i2<campo.length && j2<campo.length) {
 								if(campo[i2][j2].isBomba() == true) {
 									campo[i][j].setQtdBombasVizinhas(campo[i][j].getQtdBombasVizinhas() + 1);
 								}
