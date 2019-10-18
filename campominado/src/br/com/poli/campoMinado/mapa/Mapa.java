@@ -28,6 +28,8 @@ public abstract class Mapa {
 		
 		contarBombas();
 		
+		escolherPosicao(5,5);
+		
 		imprimeTela(true);
 		
 	}
@@ -119,6 +121,28 @@ public abstract class Mapa {
 			}
 		}
 	}
+	
+	public void escolherPosicao(int linha, int coluna) {
+		if(campo[linha][coluna].isBomba()==true) {
+			System.out.println("Fim de jogo! Você perdeu");
+		}
+		else if (campo[linha][coluna].isBomba()==false && campo[linha][coluna].getQtdBombasVizinhas()>0) {
+			campo[linha][coluna].setVisivel(true);
+			imprimeTela(false);
+		}
+		else if (campo[linha][coluna].isBomba()==false && campo[linha][coluna].getQtdBombasVizinhas()==0) {
+			campo[linha][coluna].setVisivel(true);
+			for(int i=linha-1; i<=linha+1; i++) {
+				for(int j= coluna-1; j<=coluna-1; j++) {
+					if(campo[i][j].isVisivel()==false && campo[i][j].getQtdBombasVizinhas()==0) {
+						escolherPosicao(i,j);
+					}
+				}
+			}
+			imprimeTela(false);
+		}
+	}
+	
 	
 	public Celula[][] getCampo() {
 		return campo;
