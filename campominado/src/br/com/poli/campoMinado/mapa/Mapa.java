@@ -64,33 +64,25 @@ public abstract class Mapa {
 	
 	
 	public void imprimeTela(boolean teste) {
-		if(teste == true) {
-			for (int i = 0; i < campo.length; i++) {
-				System.out.println();
-				for (int j = 0; j < campo.length; j++) {
+		for (int i = 0; i < campo.length; i++) {
+			System.out.println();
+			for (int j = 0; j < campo.length; j++) {
+				if(teste==true) {
 					if(campo[i][j].isBomba() == false)
 						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());
 					else
 						System.out.print("-1");
-			
-				} 
-			}
-		}
-		
-		else {
-			for (int i = 0; i < campo.length; i++) {
-				char var=20;
-				System.out.println();
-				for (int j = 0; j < campo.length; j++) {
+				}
+				
+				else {
 					if(campo[i][j].isBomba() == false && campo[i][j].isVisivel() == true)
 						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());
 					else if (campo[i][j].isBomba() == true && campo[i][j].isVisivel() == true)
 						System.out.print("-1");
 					else if (campo[i][j].isVisivel() == false)
 						System.out.print(" -");
-			
-				} 
-			}
+				}
+			} 
 		}
 	}
 	
