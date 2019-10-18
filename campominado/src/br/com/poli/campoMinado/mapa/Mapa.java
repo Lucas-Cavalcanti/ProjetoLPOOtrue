@@ -28,9 +28,18 @@ public abstract class Mapa {
 		
 		contarBombas();
 		
-		escolherPosicao(5,5);
+		escolherPosicao(4,4);
+		
+		imprimeTela(false);
+		
+		System.out.println();
+		System.out.println();
 		
 		imprimeTela(true);
+		
+		System.out.println();
+		System.out.println();
+		
 		
 	}
 	
@@ -85,7 +94,7 @@ public abstract class Mapa {
 		
 		else {
 			for (int i = 0; i < campo.length; i++) {
-				char var=20;
+				char var=150;
 				System.out.println();
 				System.out.println();
 				for (int j = 0; j < campo.length; j++) {
@@ -94,8 +103,7 @@ public abstract class Mapa {
 					else if (campo[i][j].isBomba() == true && campo[i][j].isVisivel() == true)
 						System.out.print("-1");
 					else if (campo[i][j].isVisivel() == false)
-						System.out.print(var);
-						
+						System.out.print(" " + var);
 					System.out.print("  ");
 			
 				} 
@@ -124,6 +132,7 @@ public abstract class Mapa {
 	
 	public void escolherPosicao(int linha, int coluna) {
 		if(campo[linha][coluna].isBomba()==true) {
+			System.out.println();
 			System.out.println("Fim de jogo! Você perdeu");
 		}
 		else if (campo[linha][coluna].isBomba()==false && campo[linha][coluna].getQtdBombasVizinhas()>0) {
@@ -133,13 +142,19 @@ public abstract class Mapa {
 		else if (campo[linha][coluna].isBomba()==false && campo[linha][coluna].getQtdBombasVizinhas()==0) {
 			campo[linha][coluna].setVisivel(true);
 			for(int i=linha-1; i<=linha+1; i++) {
-				for(int j= coluna-1; j<=coluna-1; j++) {
-					if(campo[i][j].isVisivel()==false && campo[i][j].getQtdBombasVizinhas()==0) {
-						escolherPosicao(i,j);
+				for(int j= coluna-1; j<=coluna+1; j++) {
+					if(i>=0 && j>=0 && i<campo.length && j<campo.length) {
+						
+						if(campo[i][j].isVisivel() == false && campo[i][j].getQtdBombasVizinhas() > 0) {
+							campo[i][j].setVisivel(true);
+						}
+						
+						else if(campo[i][j].isVisivel() == false && campo[i][j].getQtdBombasVizinhas() == 0) {
+							escolherPosicao(i,j);
+						}
 					}
 				}
 			}
-			imprimeTela(false);
 		}
 	}
 	
