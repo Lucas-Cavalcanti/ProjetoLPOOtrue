@@ -15,6 +15,7 @@ public class Main {
 		System.out.println("Mapa aberto:");
 		c1.getMapa().imprimeTela(true);
 		System.out.println();
+		System.out.println();
 		
 		
 		System.out.println("----------------------------------------------");
@@ -34,13 +35,12 @@ public class Main {
 		
 		CampoMinado c3 = new CampoMinado(Dificuldade.DIFICIL , "Arthur"); //CRIAR CAMPO MINADO DIFICIL
 		System.out.println();
-		System.out.println("Nome do jogador: " + c2.getJogador().getNome()); //CHECAR SE JOGADOR 3 FOI PREENCHIDO
+		System.out.println("Nome do jogador: " + c3.getJogador().getNome()); //CHECAR SE JOGADOR 3 FOI PREENCHIDO
 		System.out.println();
 		System.out.println("Mapa encoberto:");
 		c3.getMapa().escolherPosicao(0,0);
 		System.out.println("Mapa aberto:");
 		c3.getMapa().imprimeTela(true);
-		System.out.println();
 
 	}
 	
