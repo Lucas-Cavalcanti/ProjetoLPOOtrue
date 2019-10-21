@@ -1,10 +1,15 @@
 package br.com.poli.campoMinado;
 
 public class Celula {
+	
+	//ATRIVUTOS
+	
 	private boolean bandeira;
 	private boolean bomba;
 	private int qtdBombasVizinhas;
 	private boolean visivel;
+	
+	//CONSTRUTOR
 	
 	public Celula(boolean bandeira, boolean bomba, boolean visivel, int qtdBombasVizinhas) {
 		this.bandeira = bandeira;
@@ -12,6 +17,8 @@ public class Celula {
 		this.qtdBombasVizinhas = qtdBombasVizinhas;
 		this.visivel = visivel;
 	}
+	
+	//MÉTODOS
 	
 	public boolean isBandeira() {
 		return bandeira;

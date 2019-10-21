@@ -19,7 +19,7 @@ public class CampoMinado {
 		
 		this.jogador = new Jogador(jogador);
 		
-		if(dificuldade == Dificuldade.FACIL) {
+		if(dificuldade == Dificuldade.FACIL) { //USANDO UM CONSTRUTOR DIFERENTE PARA CADA DIFICULDADE
 			this.mapa = new MapaFacil();
 		}
 		else if (dificuldade == Dificuldade.MEDIO) {
