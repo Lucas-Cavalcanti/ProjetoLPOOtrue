@@ -1,4 +1,5 @@
 package br.com.poli.campoMinado;
+import java.util.*; 
 
 public class Celula {
 	
@@ -8,17 +9,37 @@ public class Celula {
 	private boolean bomba;
 	private int qtdBombasVizinhas;
 	private boolean visivel;
+	private int linha; //inicializado pelo construtor
+	private int coluna; //inicializado pelo construtor
+	private List<Celula> vizinhos = new ArrayList<Celula>();
 	
 	//CONSTRUTOR
 	
-	public Celula(boolean bandeira, boolean bomba, boolean visivel, int qtdBombasVizinhas) {
-		this.bandeira = bandeira;
-		this.bomba = bomba;
-		this.qtdBombasVizinhas = qtdBombasVizinhas;
-		this.visivel = visivel;
+	public Celula(int linha, int coluna) {
+		this.linha=linha;
+		this.coluna=coluna;
 	}
 	
 	//MÉTODOS
+	
+	public void buscarVizinhos(Celula[][] campo) {
+		for(int i = linha-1; i <= linha+1; i++) {
+			for(int j = coluna-1; j <= coluna+1; j++) {
+				if(i>=0 && j>=0 && i<campo.length && j<campo.length) {
+					vizinhos.add(campo[i][j]);
+				}
+			}
+		}
+	}
+	
+	public boolean isEmBranco() {
+		if(this.qtdBombasVizinhas == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	public boolean isBandeira() {
 		return bandeira;

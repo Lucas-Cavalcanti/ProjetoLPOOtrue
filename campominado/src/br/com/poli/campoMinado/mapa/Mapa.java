@@ -14,6 +14,12 @@ public abstract class Mapa {
 	
 	private int bombas;
 	
+	private boolean fimDeJogo;
+	
+	private boolean ganhouJogo;
+
+	private int celulasVisiveis;
+	
 	//CONSTRUTOR
 	
 	public Mapa(Dificuldade dificuldade,int bombas) {
@@ -35,7 +41,12 @@ public abstract class Mapa {
 	public void inicializaCelulas() {
 		for (int i = 0; i < campo.length; i++) {
 			for (int j = 0; j < campo.length; j++) {
-				campo[i][j] = new Celula(false,false,false,0);
+				campo[i][j] = new Celula(i,j);
+				campo[i][j].setBandeira(false);
+				campo[i][j].setBomba(false);
+				campo[i][j].setVisivel(false);
+				campo[i][j].setQtdBombasVizinhas(0);
+				
 			}
 		}
 	}
@@ -107,42 +118,62 @@ public abstract class Mapa {
 	
 	public void escolherPosicao(int linha, int coluna) {
 		if(campo[linha][coluna].isBomba()==true) { //CASO A CASA ESCOLHIDA SEJA -1
+			this.celulasVisiveis++;
+			this.fimDeJogo = true;
 			System.out.println();
 			System.out.println("Fim de jogo! Você perdeu");
 		}
 		else if (campo[linha][coluna].isBomba()==false && campo[linha][coluna].getQtdBombasVizinhas()>0) { //CASO A CASA NÃO SEJA BOMBA E > 0
+			this.celulasVisiveis++;
 			campo[linha][coluna].setVisivel(true);
 		}
 		else if (campo[linha][coluna].isBomba()==false && campo[linha][coluna].getQtdBombasVizinhas()==0) { // CASO A CASA NÃO SEJA BOMBA E = 0
-			checarZero(linha,coluna);  
+			this.celulasVisiveis++;
+			revelarEspacos(linha,coluna);  
 		}
 		imprimeTela(false);
 		System.out.println();
 		System.out.println();
+		this.ganhouJogo = verificarGanhouJogo();
 	}
 	
-	public void checarZero(int linha, int coluna) { ////USA A RECURSIVIDADE PARA TORNAR VISÍVEL TODOS OS 0s E NÚMEROS INTEIROS ADJASCENTES A ELES
+	public void revelarEspacos(int linha, int coluna) { ////USA A RECURSIVIDADE PARA TORNAR VISÍVEL TODOS OS 0s E NÚMEROS INTEIROS ADJASCENTES A ELES
 		campo[linha][coluna].setVisivel(true);
 		for(int i=linha-1; i<=linha+1; i++) {
 			for(int j= coluna-1; j<=coluna+1; j++) {
 				if(i>=0 && j>=0 && i<campo.length && j<campo.length) {
 					if(campo[i][j].isVisivel() == false && campo[i][j].getQtdBombasVizinhas() > 0) {
+						this.celulasVisiveis++;
 						campo[i][j].setVisivel(true);
 					}
 					else if(campo[i][j].isVisivel() == false && campo[i][j].getQtdBombasVizinhas() == 0) { 
-						checarZero(i,j); //ESSA CHAMADA GARANTE A VARREDURA DE TODAS AS CASAS ADJASCENTES AOS 0s 
+						this.celulasVisiveis++;
+						revelarEspacos(i,j); //ESSA CHAMADA GARANTE A VARREDURA DE TODAS AS CASAS ADJASCENTES AOS 0s 
 					}
 				}
 			}
 		}
 	}
+
+	public boolean verificarGanhouJogo() {
+		if(this.celulasVisiveis >= (this.dificuldade.getValor()*this.dificuldade.getValor()) - this.bombas) {
+			System.out.println("Você ganhou o jogo");
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
+	public Celula getCelula(int linha,int coluna){
+		return campo[linha][coluna];
+	}
 	
 	
 	public Celula[][] getCampo() {
 		return campo;
 	}
-
+	
 	public void setCampo(Celula[][] campo) {
 		this.campo = campo;
 	}
@@ -154,6 +185,34 @@ public abstract class Mapa {
 	public void setDificuldade(Dificuldade dificuldade) {
 		this.dificuldade = dificuldade;
 	}
+
+	public int getBombas() {
+		return bombas;
+	}
+
+	public void setBombas(int bombas) {
+		this.bombas = bombas;
+	}
+
+	public boolean isFimDeJogo() {
+		return fimDeJogo;
+	}
+
+	public boolean isGanhouJogo() {
+		return ganhouJogo;
+	}
+
+	public int getCelulasVisiveis() {
+		return celulasVisiveis;
+	}
+
+	public void setCelulasVisiveis(int celulasVisiveis) {
+		this.celulasVisiveis = celulasVisiveis;
+	}
+	
+	
+	
+	
 
 	
 }
