@@ -120,7 +120,6 @@ public abstract class Mapa {
 		if(campo[linha][coluna].isBomba()==true) { //CASO A CASA ESCOLHIDA SEJA -1
 			this.celulasVisiveis++;
 			this.fimDeJogo = true;
-			System.out.println();
 			System.out.println("Fim de jogo! Você perdeu");
 		}
 		else if (campo[linha][coluna].isBomba()==false && campo[linha][coluna].getQtdBombasVizinhas()>0) { //CASO A CASA NÃO SEJA BOMBA E > 0
