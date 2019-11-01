@@ -53,7 +53,7 @@ public class CampoMinado {
 				coluna = sc.nextInt();
 			}
 			mapa.escolherPosicao(linha, coluna);
-		}while(mapa.isFimDeJogo() == false && mapa.isGanhouJogo()==false);
+		} while(mapa.isFimDeJogo() == false && mapa.isGanhouJogo()==false);
 	}
 	
 	public Mapa getMapa() {
