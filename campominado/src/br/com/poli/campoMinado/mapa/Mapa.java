@@ -126,21 +126,22 @@ public abstract class Mapa {
 		else if (campo[linha][coluna].isBomba()==false && campo[linha][coluna].getQtdBombasVizinhas()>0) { //CASO A CASA NÃO SEJA BOMBA E > 0
 			this.celulasVisiveis++;
 			campo[linha][coluna].setVisivel(true);
+			imprimeTela(false);
 		}
 		else if (campo[linha][coluna].isBomba()==false && campo[linha][coluna].getQtdBombasVizinhas()==0) { // CASO A CASA NÃO SEJA BOMBA E = 0
 			this.celulasVisiveis++;
-			revelarEspacos(linha,coluna);  
+			revelarEspacos(getCelula(linha,coluna));  
+			imprimeTela(false);
 		}
-		imprimeTela(false);
 		System.out.println();
 		System.out.println();
 		this.ganhouJogo = verificarGanhouJogo();
 	}
 	
-	public void revelarEspacos(int linha, int coluna) { ////USA A RECURSIVIDADE PARA TORNAR VISÍVEL TODOS OS 0s E NÚMEROS INTEIROS ADJASCENTES A ELES
-		campo[linha][coluna].setVisivel(true);
-		for(int i=linha-1; i<=linha+1; i++) {
-			for(int j= coluna-1; j<=coluna+1; j++) {
+	private void revelarEspacos(Celula celulaEscolhida) { ////USA A RECURSIVIDADE PARA TORNAR VISÍVEL TODOS OS 0s E NÚMEROS INTEIROS ADJASCENTES A ELES
+		celulaEscolhida.setVisivel(true);
+		for(int i= celulaEscolhida.getLinha() -1; i<= celulaEscolhida.getLinha()+1; i++) {
+			for(int j= celulaEscolhida.getColuna()-1; j<= celulaEscolhida.getColuna()+1; j++) {
 				if(i>=0 && j>=0 && i<campo.length && j<campo.length) {
 					if(campo[i][j].isVisivel() == false && campo[i][j].getQtdBombasVizinhas() > 0) {
 						this.celulasVisiveis++;
@@ -148,16 +149,16 @@ public abstract class Mapa {
 					}
 					else if(campo[i][j].isVisivel() == false && campo[i][j].getQtdBombasVizinhas() == 0) { 
 						this.celulasVisiveis++;
-						revelarEspacos(i,j); //ESSA CHAMADA GARANTE A VARREDURA DE TODAS AS CASAS ADJASCENTES AOS 0s 
+						revelarEspacos(getCelula(i,j)); //ESSA CHAMADA GARANTE A VARREDURA DE TODAS AS CASAS ADJASCENTES AOS 0s 
 					}
 				}
 			}
 		}
 	}
-
-	public boolean verificarGanhouJogo() {
+	
+	private boolean verificarGanhouJogo() {
 		if(this.celulasVisiveis >= (this.dificuldade.getValor()*this.dificuldade.getValor()) - this.bombas) {
-			System.out.println("Você ganhou o jogo");
+			System.out.println("VOCÊ GANHOU O JOGO!!!!");
 			return true;
 		}
 		else {
@@ -210,11 +211,7 @@ public abstract class Mapa {
 		this.celulasVisiveis = celulasVisiveis;
 	}
 	
-	
-	
-	
-
-	
+		
 }
 
 

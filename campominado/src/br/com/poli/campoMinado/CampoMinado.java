@@ -2,6 +2,8 @@ package br.com.poli.campoMinado;
 
 import br.com.poli.campoMinado.mapa.*;
 
+import java.util.Scanner;
+
 public class CampoMinado {
 	
 	//ATRIBUTOS
@@ -31,6 +33,29 @@ public class CampoMinado {
 		
 	}
 
+	public void iniciarJogo() {
+		Scanner sc = new Scanner(System.in);
+		int linha,coluna;
+		mapa.imprimeTela(false);
+		System.out.println();
+		System.out.println();
+		do {
+			System.out.print("Insira a linha: ");
+			linha = sc.nextInt();
+			while(linha<0 || linha>mapa.getCampo().length-1) {
+				System.out.println("Valor invalido, insira a linha corretamente: ");
+				linha = sc.nextInt();
+			}
+			System.out.print("Insira a coluna: ");
+			coluna = sc.nextInt();
+			while(coluna<0 || coluna>mapa.getCampo().length-1) {
+				System.out.println("Valor invalido, insira a coluna corretamente: ");
+				coluna = sc.nextInt();
+			}
+			mapa.escolherPosicao(linha, coluna);
+		}while(mapa.isFimDeJogo() == false && mapa.isGanhouJogo()==false);
+	}
+	
 	public Mapa getMapa() {
 		return mapa;
 	}

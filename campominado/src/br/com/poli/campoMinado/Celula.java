@@ -21,7 +21,7 @@ public class Celula {
 	}
 	
 	//MÉTODOS
-	
+
 	public void buscarVizinhos(Celula[][] campo) {
 		for(int i = linha-1; i <= linha+1; i++) {
 			for(int j = coluna-1; j <= coluna+1; j++) {
@@ -65,5 +65,27 @@ public class Celula {
 	public void setVisivel(boolean visivel) {
 		this.visivel = visivel;
 	}
-	
+	public int getLinha() {
+		return linha;
+	}
+
+	public void setLinha(int linha) {
+		this.linha = linha;
+	}
+
+	public int getColuna() {
+		return coluna;
+	}
+
+	public void setColuna(int coluna) {
+		this.coluna = coluna;
+	}
+
+	public List<Celula> getVizinhos() {
+		return vizinhos;
+	}
+
+	public void setVizinhos(List<Celula> vizinhos) {
+		this.vizinhos = vizinhos;
+	}
 }
