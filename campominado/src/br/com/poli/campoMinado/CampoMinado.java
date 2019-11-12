@@ -43,13 +43,13 @@ public class CampoMinado {
 			System.out.print("Insira a linha: ");
 			linha = sc.nextInt();
 			while(linha<0 || linha>mapa.getCampo().length-1) {
-				System.out.println("Valor invalido, insira a linha corretamente: ");
+				System.out.print("Valor invalido, insira a linha corretamente: ");
 				linha = sc.nextInt();
 			}
 			System.out.print("Insira a coluna: ");
 			coluna = sc.nextInt();
 			while(coluna<0 || coluna>mapa.getCampo().length-1) {
-				System.out.println("Valor invalido, insira a coluna corretamente: ");
+				System.out.print("Valor invalido, insira a coluna corretamente: ");
 				coluna = sc.nextInt();
 			}
 			mapa.escolherPosicao(linha, coluna);

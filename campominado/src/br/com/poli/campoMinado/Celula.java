@@ -80,7 +80,7 @@ public class Celula {
 	public void setColuna(int coluna) {
 		this.coluna = coluna;
 	}
-
+	
 	public List<Celula> getVizinhos() {
 		return vizinhos;
 	}

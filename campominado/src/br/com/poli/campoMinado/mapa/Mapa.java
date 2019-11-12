@@ -210,7 +210,6 @@ public abstract class Mapa {
 		this.celulasVisiveis = celulasVisiveis;
 	}
 	
-		
 }
 
 
