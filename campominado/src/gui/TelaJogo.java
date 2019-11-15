@@ -19,7 +19,7 @@ public class TelaJogo extends JFrame {
 
 	private JPanel contentPane;
 	
-	private Botao matrizBotao[][];
+	private JButton matrizBotao[][];
 	
 	private Mapa mapa;
 
@@ -36,16 +36,15 @@ public class TelaJogo extends JFrame {
 	
 	public TelaJogo(Dificuldade dificuldade) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 800);
+		setBounds(100, 100, 1000, 1000);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		
-		panel.setBounds(100, 100, 600, 600);
+		panel.setBounds(100, 100, 750, 750);
 		contentPane.add(panel);
-		panel.setLayout(new GridLayout(9,9));
 		
 		
 		if (dificuldade == Dificuldade.FACIL) {
@@ -57,33 +56,23 @@ public class TelaJogo extends JFrame {
 		else if (dificuldade == Dificuldade.DIFICIL) {
 			mapa = new MapaDificil();
 		}
-		mapa.setDificuldade(dificuldade);
+		
+		panel.setLayout(new GridLayout(this.mapa.getDificuldade().getValor(),this.mapa.getDificuldade().getValor()));
+		
 		criarBotoes();
 		
 		}
 	
 	public void criarBotoes() {
 		
-		this.matrizBotao = new Botao[this.mapa.getDificuldade().getValor()][this.mapa.getDificuldade().getValor()];
+		this.matrizBotao = new JButton[this.mapa.getDificuldade().getValor()][this.mapa.getDificuldade().getValor()];
 		
 		for (int i = 0; i < this.matrizBotao.length; i++) {
 			for (int j = 0; j < this.matrizBotao.length; j++) {
 				
-				matrizBotao[i][j] = new Botao(); 
+				matrizBotao[i][j] = new JButton(); 
 				panel.add(matrizBotao[i][j]);
-				(matrizBotao[i][j].getBotao()).addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-						matrizBotao[i][j].setNumDica( mapa.getCelula(i, j).getQtdBombasVizinhas());
-						
-						
-						
-						
-						
-					}
-				});
-				
-				
+								
 			}
 			
 		}

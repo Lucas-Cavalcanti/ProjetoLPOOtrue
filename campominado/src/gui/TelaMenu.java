@@ -33,10 +33,15 @@ public class TelaMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+					
 					TelaMenu frame = new TelaMenu();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
+					
 					e.printStackTrace();
+					
 				}
 			}
 		});
@@ -47,7 +52,7 @@ public class TelaMenu extends JFrame {
 	 */
 	public TelaMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 450);
+		setBounds(100, 100, 700, 700);
 		contentPane = new JPanel();
 		contentPane.setForeground(Color.WHITE);
 		contentPane.setBackground(Color.CYAN);
@@ -56,15 +61,15 @@ public class TelaMenu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"F\u00E1cil", "M\u00E9dio", "Dif\u00EDcil"}));
-		comboBox.setBounds(280, 174, 83, 63);
+		comboBox.setBounds(246, 201, 168, 84);
 		contentPane.add(comboBox);
 		
 		
 		JLabel lblCampoMinado = new JLabel("Campo Minado");
-		lblCampoMinado.setFont(new Font("Tahoma", Font.ITALIC, 28));
-		lblCampoMinado.setBounds(213, 13, 198, 83);
+		lblCampoMinado.setFont(new Font("Tahoma", Font.ITALIC, 36));
+		lblCampoMinado.setBounds(213, 13, 350, 175);
 		contentPane.add(lblCampoMinado);
 		
 		JButton btnNewButton = new JButton("JOGAR");
@@ -94,7 +99,7 @@ public class TelaMenu extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(259, 319, 128, 50);
+		btnNewButton.setBounds(267, 423, 134, 63);
 		contentPane.add(btnNewButton);
 		
 		
