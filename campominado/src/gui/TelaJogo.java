@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
@@ -14,6 +15,8 @@ import java.awt.GridBagLayout;
 
 import br.com.poli.campoMinado.*;
 import br.com.poli.campoMinado.mapa.*;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class TelaJogo extends JFrame {
 
@@ -57,7 +60,20 @@ public class TelaJogo extends JFrame {
 			mapa = new MapaDificil();
 		}
 		
-		panel.setLayout(new GridLayout(this.mapa.getDificuldade().getValor(),this.mapa.getDificuldade().getValor()));
+		panel.setLayout(new GridLayout(9,9));
+		
+		JButton btnNewButton = new JButton("Sair");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				System.exit(0);
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\lucas\\Downloads\\Botaosair.png"));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton.setForeground(Color.BLACK);
+		btnNewButton.setBounds(12, 13, 135, 60);
+		contentPane.add(btnNewButton);
 		
 		criarBotoes();
 		
@@ -70,13 +86,28 @@ public class TelaJogo extends JFrame {
 		for (int i = 0; i < this.matrizBotao.length; i++) {
 			for (int j = 0; j < this.matrizBotao.length; j++) {
 				
-				matrizBotao[i][j] = new JButton(); 
-				panel.add(matrizBotao[i][j]);
+				JButton but = new JButton();
+				
+				but.setBackground(Color.YELLOW);
+				
+				but.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						
+						but.setBackground(Color.WHITE);
+						
+					
+						
+					}
+					
+				});
+				
+				matrizBotao[i][j] = but ; 
+				
+				panel.add(but);
 								
 			}
 			
 		}
 	}
-	
-	
 }

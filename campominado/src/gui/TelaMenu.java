@@ -38,6 +38,7 @@ public class TelaMenu extends JFrame {
 					TelaMenu frame = new TelaMenu();
 					frame.setVisible(true);
 					
+					
 				} catch (Exception e) {
 					
 					e.printStackTrace();
