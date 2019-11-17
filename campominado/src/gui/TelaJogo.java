@@ -60,8 +60,9 @@ public class TelaJogo extends JFrame {
 			mapa = new MapaDificil();
 		}
 		
-		panel.setLayout(new GridLayout(9,9));
+		panel.setLayout(new GridLayout(this.mapa.getDificuldade().getValor(),this.mapa.getDificuldade().getValor()));
 		
+		//*****************************************************************
 		JButton btnNewButton = new JButton("Sair");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -74,6 +75,7 @@ public class TelaJogo extends JFrame {
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setBounds(12, 13, 135, 60);
 		contentPane.add(btnNewButton);
+		//****************************************************************
 		
 		criarBotoes();
 		
