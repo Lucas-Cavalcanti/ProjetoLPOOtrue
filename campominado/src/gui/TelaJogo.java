@@ -88,8 +88,8 @@ public class TelaJogo extends JFrame {
 		for (int i = 0; i < this.matrizBotao.length; i++) {
 			for (int j = 0; j < this.matrizBotao.length; j++) {
 				
+				// ACTION LISTENER DA MATRIZ
 				JButton but = new JButton();
-				
 				but.setBackground(Color.YELLOW);
 				
 				but.addActionListener(new ActionListener() {
@@ -103,9 +103,9 @@ public class TelaJogo extends JFrame {
 					}
 					
 				});
+				// ACTION LISTENER DA MATRIZ
 				
-				matrizBotao[i][j] = but ; 
-				
+				matrizBotao[i][j] = but;
 				panel.add(but);
 								
 			}
