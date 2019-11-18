@@ -17,7 +17,7 @@ import br.com.poli.campoMinado.*;
 import br.com.poli.campoMinado.mapa.*;
 import java.awt.Font;
 import javax.swing.ImageIcon;
-
+import java.util.*;
 public class TelaJogo extends JFrame {
 
 	private JPanel contentPane;
@@ -87,17 +87,8 @@ public class TelaJogo extends JFrame {
 				JButton but = new JButton();
 				but.setBackground(Color.YELLOW);
 				
-				but.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-						
-						but.setBackground(Color.BLACK);
-						
-						
-						
-					}
-					
-				});
+				
+				selecionarCelula(but,i,j);
 				// ACTION LISTENER DA MATRIZ
 				
 				matrizBotao[i][j] = but;
@@ -108,6 +99,41 @@ public class TelaJogo extends JFrame {
 			
 		}
 	}
+	
+	public void selecionarCelula(JButton botao,int linha,int coluna) {
+		botao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				getMapa().escolherPosicao(linha, coluna);
+				
+				for (int i2 = 0; i2 < getMatrizBotao().length; i2++) {
+					for (int j2 = 0; j2 < getMatrizBotao().length; j2++) {
+						if (getMapa().getCelula(linha, coluna).isEmBranco() && getMapa().getCelula(linha, coluna).isVisivel()) {
+							botao.setBackground(Color.BLACK);
+						}
+						else if(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()>0 && getMapa().getCelula(linha, coluna).isVisivel()) {
+							botao.setText( Integer.toString(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()));
+							botao.setFont(new Font("Tahoma", Font.BOLD, 30));
+						}
+					}
+				}
+				
+				
+				
+				for(int i = linha-1; i <= linha+1;i++) {
+					for(int j = coluna-1; j<=coluna+1 ; j++) {
+						
+					}
+				}
+				
+				
+				
+			}
+			
+		});
+		
+	}
+	
 	public Mapa getMapa() {
 		return mapa;
 	}

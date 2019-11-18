@@ -103,8 +103,11 @@ public class TelaMenu extends JFrame {
 		btnNewButton.setBounds(267, 423, 134, 63);
 		contentPane.add(btnNewButton);
 		
+		JButton btnNewButton_1 = new JButton("RANKING");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_1.setBounds(267, 529, 134, 63);
+		contentPane.add(btnNewButton_1);
+		
 			
 	}
-	
-
 }
