@@ -27,11 +27,6 @@ public class TelaJogo extends JFrame {
 	private Mapa mapa;
 
 	/**
-	 * Launch the application.
-	 */
-
-
-	/**
 	 * Create the frame.
 	 */
 	
@@ -98,7 +93,6 @@ public class TelaJogo extends JFrame {
 						
 						but.setBackground(Color.BLACK);
 						
-					
 						
 					}
 					
