@@ -103,9 +103,8 @@ public class TelaMenu extends JFrame {
 		btnNewButton.setBounds(267, 423, 134, 63);
 		contentPane.add(btnNewButton);
 		
-		
-		
 			
 	}
+	
 
 }

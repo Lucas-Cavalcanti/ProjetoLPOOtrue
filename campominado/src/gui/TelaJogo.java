@@ -94,6 +94,7 @@ public class TelaJogo extends JFrame {
 						but.setBackground(Color.BLACK);
 						
 						
+						
 					}
 					
 				});
@@ -107,4 +108,14 @@ public class TelaJogo extends JFrame {
 			
 		}
 	}
+	public Mapa getMapa() {
+		return mapa;
+	}
+	
+	public JButton[][] getMatrizBotao(){
+		return matrizBotao;
+	}
 }
+
+
+
