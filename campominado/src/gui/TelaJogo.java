@@ -65,7 +65,7 @@ public class TelaJogo extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\lucas\\Downloads\\Botaosair.png"));
+		btnNewButton.setIcon(new ImageIcon(".\\images\\Botaosair.png"));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setBounds(12, 13, 135, 60);
@@ -143,6 +143,9 @@ public class TelaJogo extends JFrame {
 		}
 		
 	}
+	
+	
+	
 	
 	public Mapa getMapa() {
 		return mapa;
