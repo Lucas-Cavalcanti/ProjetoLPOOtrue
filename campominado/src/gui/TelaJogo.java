@@ -104,33 +104,43 @@ public class TelaJogo extends JFrame {
 		botao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				getMapa().escolherPosicao(linha, coluna);
-				
-				for (int i2 = 0; i2 < getMatrizBotao().length; i2++) {
-					for (int j2 = 0; j2 < getMatrizBotao().length; j2++) {
-						if (getMapa().getCelula(linha, coluna).isEmBranco() && getMapa().getCelula(linha, coluna).isVisivel()) {
-							botao.setBackground(Color.BLACK);
-						}
-						else if(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()>0 && getMapa().getCelula(linha, coluna).isVisivel()) {
-							botao.setText( Integer.toString(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()));
-							botao.setFont(new Font("Tahoma", Font.BOLD, 30));
-						}
-					}
+				getMapa().escolherPosicao(linha, coluna);		
+				revelarEspacosInterface(botao,linha,coluna);
+				if (getMapa().getCelula(linha, coluna).isEmBranco() && getMapa().getCelula(linha, coluna).isVisivel()) {
+					botao.setBackground(Color.BLACK);
+					
 				}
-				
-				
-				
-				for(int i = linha-1; i <= linha+1;i++) {
-					for(int j = coluna-1; j<=coluna+1 ; j++) {
-						
-					}
+				else if(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()>0 && getMapa().getCelula(linha, coluna).isVisivel()) {
+					botao.setText( Integer.toString(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()));
+					botao.setFont(new Font("Tahoma", Font.BOLD, 30));
 				}
-				
-				
+				else {
+					botao.setText("bomba");
+				}
 				
 			}
 			
 		});
+		
+	}
+	
+	public void revelarEspacosInterface(JButton botao, int linha, int coluna) {
+		
+		for (int i = 0; i < matrizBotao.length; i++) {
+			for (int j = 0; j < matrizBotao.length; j++) {
+				if(getMapa().getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel() ) {
+					matrizBotao[i][j].setBackground(Color.BLACK);
+				}
+				else if(getMapa().getCelula(i, j).getQtdBombasVizinhas() > 0 && getMapa().getCelula(i, j).isVisivel()) {
+					matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
+					matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 30));
+				}
+				else if(getMapa().getCelula(i, j).getQtdBombasVizinhas() < 0 && getMapa().getCelula(i, j).isVisivel()) {
+					matrizBotao[i][j].setText("bomba");				
+				}
+				
+			}
+		}
 		
 	}
 	
