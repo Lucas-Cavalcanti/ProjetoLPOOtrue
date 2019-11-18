@@ -96,7 +96,7 @@ public class TelaJogo extends JFrame {
 					public void actionPerformed(ActionEvent arg0) {
 						
 						
-						but.setBackground(Color.WHITE);
+						but.setBackground(Color.BLACK);
 						
 					
 						
@@ -106,6 +106,7 @@ public class TelaJogo extends JFrame {
 				// ACTION LISTENER DA MATRIZ
 				
 				matrizBotao[i][j] = but;
+				
 				panel.add(but);
 								
 			}
