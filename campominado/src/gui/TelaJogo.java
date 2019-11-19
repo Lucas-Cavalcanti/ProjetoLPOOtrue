@@ -88,26 +88,26 @@ public class TelaJogo extends JFrame {
 				but.setBackground(Color.YELLOW);
 				
 				
-				selecionarCelula(but,i,j);
+				escolherPosicaoInterface(but,i,j);
 				// ACTION LISTENER DA MATRIZ
 				
 				matrizBotao[i][j] = but;
 				
 				panel.add(but);
-								
+							
 			}
 			
 		}
 	}
 	
-	public void selecionarCelula(JButton botao,int linha,int coluna) {
+	public void escolherPosicaoInterface(JButton botao,int linha,int coluna) {
 		botao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				getMapa().escolherPosicao(linha, coluna);		
-				revelarEspacosInterface(botao,linha,coluna);
+				revelarEspacosInterface(linha,coluna);
 				if (getMapa().getCelula(linha, coluna).isEmBranco() && getMapa().getCelula(linha, coluna).isVisivel()) {
-					botao.setBackground(Color.WHITE);
+					botao.setBackground(Color.BLACK);
 					
 				}
 				else if(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()>0 && getMapa().getCelula(linha, coluna).isVisivel()) {
@@ -124,7 +124,7 @@ public class TelaJogo extends JFrame {
 		
 	}
 	
-	public void revelarEspacosInterface(JButton botao, int linha, int coluna) {
+	public void revelarEspacosInterface(int linha, int coluna) {
 		
 		for (int i = 0; i < matrizBotao.length; i++) {
 			for (int j = 0; j < matrizBotao.length; j++) {
