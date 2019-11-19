@@ -156,7 +156,7 @@ public abstract class Mapa {
 		
 	}
 	
-	private boolean verificarGanhouJogo() {
+	public boolean verificarGanhouJogo() { // O MÉTODO SE TORNOU PUBLIC PARA PODES SER UTILIZADO NA INTERFACE
 		if(this.celulasVisiveis >= (this.dificuldade.getValor()*this.dificuldade.getValor()) - this.bombas) {
 			System.out.println("VOCÊ GANHOU O JOGO!!!!");
 			return true;

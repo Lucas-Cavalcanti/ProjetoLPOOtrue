@@ -94,7 +94,7 @@ public class TelaJogo extends JFrame {
 				matrizBotao[i][j] = but;
 				
 				panel.add(but);
-							
+				
 			}
 			
 		}
@@ -106,18 +106,23 @@ public class TelaJogo extends JFrame {
 				
 				getMapa().escolherPosicao(linha, coluna);		
 				revelarEspacosInterface(linha,coluna);
+				
 				if (getMapa().getCelula(linha, coluna).isEmBranco() && getMapa().getCelula(linha, coluna).isVisivel()) {
 					botao.setBackground(Color.BLACK);
 					
 				}
 				else if(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()>0 && getMapa().getCelula(linha, coluna).isVisivel()) {
-					botao.setText( Integer.toString(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()));
-					botao.setFont(new Font("Tahoma", Font.BOLD, 30));
+					botao.setText(Integer.toString(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()));
+					
 				}
 				else {
 					botao.setText("bomba");
+					System.exit(0);
 				}
-				
+				ajustarLetra(linha,coluna);
+				if(getMapa().verificarGanhouJogo() == true) {
+					System.exit(0);
+				}
 			}
 			
 		});
@@ -128,16 +133,18 @@ public class TelaJogo extends JFrame {
 		
 		for (int i = 0; i < matrizBotao.length; i++) {
 			for (int j = 0; j < matrizBotao.length; j++) {
+				
 				if(getMapa().getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel() ) {
 					matrizBotao[i][j].setBackground(Color.BLACK);
 				}
 				else if(getMapa().getCelula(i, j).getQtdBombasVizinhas() > 0 && getMapa().getCelula(i, j).isVisivel()) {
 					matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
-					matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 30));
 				}
 				else if(getMapa().getCelula(i, j).getQtdBombasVizinhas() < 0 && getMapa().getCelula(i, j).isVisivel()) {
-					matrizBotao[i][j].setText("bomba");				
+					matrizBotao[i][j].setText("B");				
 				}
+				
+				ajustarLetra(i,j);
 				
 			}
 		}
@@ -145,6 +152,17 @@ public class TelaJogo extends JFrame {
 	}
 	
 	
+	public void ajustarLetra(int i, int j) {
+		if(this.mapa.getDificuldade() == Dificuldade.FACIL) {
+			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 30));
+		}
+		else if(this.mapa.getDificuldade() == Dificuldade.MEDIO) {
+			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 10));
+		}
+		else {
+			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 5));
+		}
+	}
 	
 	
 	public Mapa getMapa() {
