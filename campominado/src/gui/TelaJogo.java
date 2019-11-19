@@ -18,6 +18,7 @@ import br.com.poli.campoMinado.mapa.*;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.util.*;
+
 public class TelaJogo extends JFrame {
 
 	private JPanel contentPane;
@@ -33,15 +34,17 @@ public class TelaJogo extends JFrame {
 	JPanel panel = new JPanel();
 	
 	public TelaJogo(Dificuldade dificuldade) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 1000);
+		setBounds(100, 100, 1100, 1100);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		
-		panel.setBounds(100, 100, 750, 750);
+		panel.setBounds(12, 75, 900, 900);
 		contentPane.add(panel);
 		
 		
@@ -68,7 +71,7 @@ public class TelaJogo extends JFrame {
 		btnNewButton.setIcon(new ImageIcon(".\\images\\Botaosair.png"));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setBounds(12, 13, 135, 60);
+		btnNewButton.setBounds(12, 13, 215, 44);
 		contentPane.add(btnNewButton);
 		//****************************************************************
 		
@@ -104,8 +107,9 @@ public class TelaJogo extends JFrame {
 		botao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				getMapa().escolherPosicao(linha, coluna);		
-				revelarEspacosInterface(linha,coluna);
+				getMapa().escolherPosicao(linha, coluna);	
+				
+				revelarEspacosInterface();
 				
 				if (getMapa().getCelula(linha, coluna).isEmBranco() && getMapa().getCelula(linha, coluna).isVisivel()) {
 					botao.setBackground(Color.BLACK);
@@ -116,12 +120,21 @@ public class TelaJogo extends JFrame {
 					
 				}
 				else {
-					botao.setText("bomba");
-					System.exit(0);
+					botao.setText("B");
+					botao.setBackground(Color.RED);
+					
+					TelaLoser loser = new TelaLoser();
+					
+					loser.setVisible(true);
+					
 				}
 				ajustarLetra(linha,coluna);
 				if(getMapa().verificarGanhouJogo() == true) {
-					System.exit(0);
+					TelaVencedor winner = new TelaVencedor();
+					
+					winner.setVisible(true);
+				
+
 				}
 			}
 			
@@ -129,7 +142,7 @@ public class TelaJogo extends JFrame {
 		
 	}
 	
-	public void revelarEspacosInterface(int linha, int coluna) {
+	public void revelarEspacosInterface() {
 		
 		for (int i = 0; i < matrizBotao.length; i++) {
 			for (int j = 0; j < matrizBotao.length; j++) {
@@ -157,10 +170,10 @@ public class TelaJogo extends JFrame {
 			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 30));
 		}
 		else if(this.mapa.getDificuldade() == Dificuldade.MEDIO) {
-			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 10));
+			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 20));
 		}
 		else {
-			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 5));
+			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 3));
 		}
 	}
 	
