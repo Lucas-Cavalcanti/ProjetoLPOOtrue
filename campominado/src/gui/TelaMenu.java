@@ -33,8 +33,6 @@ public class TelaMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					
 					TelaMenu frame = new TelaMenu();
 					frame.setVisible(true);
 					
@@ -52,6 +50,8 @@ public class TelaMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaMenu() {
+//		chamaJanelaAbertura();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 700);
 		contentPane = new JPanel();
@@ -109,5 +109,15 @@ public class TelaMenu extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 			
+	}
+	
+	public void chamaJanelaAbertura() {
+		SplashScreen ja = new SplashScreen();
+		ja.setVisible(true);
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {
+		}
+		ja.setVisible(false);
 	}
 }
