@@ -107,7 +107,7 @@ public class TelaJogo extends JFrame {
 				getMapa().escolherPosicao(linha, coluna);		
 				revelarEspacosInterface(botao,linha,coluna);
 				if (getMapa().getCelula(linha, coluna).isEmBranco() && getMapa().getCelula(linha, coluna).isVisivel()) {
-					botao.setBackground(Color.BLACK);
+					botao.setBackground(Color.WHITE);
 					
 				}
 				else if(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()>0 && getMapa().getCelula(linha, coluna).isVisivel()) {

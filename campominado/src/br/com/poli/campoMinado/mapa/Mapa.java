@@ -153,6 +153,7 @@ public abstract class Mapa {
 				}
 			}
 		}
+		
 	}
 	
 	private boolean verificarGanhouJogo() {
