@@ -44,7 +44,7 @@ public class TelaJogo extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		panel.setBounds(12, 75, 900, 900);
+		panel.setBounds(12, 75, 500, 500);
 		contentPane.add(panel);
 		
 		
@@ -87,48 +87,50 @@ public class TelaJogo extends JFrame {
 			for (int j = 0; j < this.matrizBotao.length; j++) {
 				
 				// ACTION LISTENER DA MATRIZ
-				JButton but = new JButton();
-				but.setBackground(Color.YELLOW);
+				matrizBotao[i][j] = new JButton();
+				matrizBotao[i][j].setBackground(Color.YELLOW);
 				
 				
-				escolherPosicaoInterface(but,i,j);
+				escolherPosicaoInterface(i,j);
 				// ACTION LISTENER DA MATRIZ
 				
-				matrizBotao[i][j] = but;
 				
-				panel.add(but);
+				panel.add(matrizBotao[i][j]);
 				
 			}
 			
 		}
 	}
 	
-	public void escolherPosicaoInterface(JButton botao,int linha,int coluna) {
-		botao.addActionListener(new ActionListener() {
+	public void escolherPosicaoInterface(int i,int j) {
+		matrizBotao[i][j].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				getMapa().escolherPosicao(linha, coluna);	
+				getMapa().escolherPosicao(i, j);	
 				
 				revelarEspacosInterface();
 				
-				if (getMapa().getCelula(linha, coluna).isEmBranco() && getMapa().getCelula(linha, coluna).isVisivel()) {
-					botao.setBackground(Color.BLACK);
+				if (getMapa().getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel()) {
+					matrizBotao[i][j].setBackground(Color.BLACK);
 					
 				}
-				else if(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()>0 && getMapa().getCelula(linha, coluna).isVisivel()) {
-					botao.setText(Integer.toString(getMapa().getCelula(linha, coluna).getQtdBombasVizinhas()));
+				else if(getMapa().getCelula(i, j).getQtdBombasVizinhas()>0 && getMapa().getCelula(i, j).isVisivel()) {
+					matrizBotao[i][j].setText(Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
 					
 				}
+				
 				else {
-					botao.setText("B");
-					botao.setBackground(Color.RED);
+					matrizBotao[i][j].setText("B");
+					matrizBotao[i][j].setBackground(Color.RED);
 					
 					TelaLoser loser = new TelaLoser();
 					
 					loser.setVisible(true);
 					
 				}
-				ajustarLetra(linha,coluna);
+				
+				ajustarLetra(i,j);
+				
 				if(getMapa().verificarGanhouJogo() == true) {
 					TelaVencedor winner = new TelaVencedor();
 					
