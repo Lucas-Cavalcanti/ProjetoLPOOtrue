@@ -25,6 +25,7 @@ public class TelaJogo extends JFrame {
 	
 	private JButton matrizBotao[][];
 	
+	
 	private Mapa mapa;
 
 	/**
@@ -36,7 +37,7 @@ public class TelaJogo extends JFrame {
 	public TelaJogo(Dificuldade dificuldade) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1500, 1500);
+		setBounds(100, 100, 1000, 1000);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,7 +45,7 @@ public class TelaJogo extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		panel.setBounds(12, 75, 1400, 1400);
+		panel.setBounds(12, 75, 500, 500);
 		contentPane.add(panel);
 		
 		
@@ -105,7 +106,7 @@ public class TelaJogo extends JFrame {
 		matrizBotao[i][j].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				getMapa().escolherPosicao(i, j);	
+				getMapa().escolherPosicao(i, j);
 				
 				if (getMapa().getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel()) {
 					matrizBotao[i][j].setBackground(Color.BLACK);
@@ -135,13 +136,10 @@ public class TelaJogo extends JFrame {
 					TelaVencedor winner = new TelaVencedor();
 					
 					winner.setVisible(true);
-				
-
 				}
 			}
 			
 		});
-		
 	}
 	
 	public void revelarEspacosInterface(boolean teste) {
@@ -156,7 +154,7 @@ public class TelaJogo extends JFrame {
 					else if(mapa.getCelula(i, j).getQtdBombasVizinhas() > 0 && getMapa().getCelula(i, j).isVisivel()) {
 						matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
 					}
-					else if(mapa.getCelula(i, j).getQtdBombasVizinhas() < 0 && getMapa().getCelula(i, j).isVisivel()) {
+					else if(mapa.getCelula(i, j).isBomba() && getMapa().getCelula(i, j).isVisivel()) {
 						matrizBotao[i][j].setText("B");				
 					}
 					
@@ -170,7 +168,7 @@ public class TelaJogo extends JFrame {
 						matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
 					}
 					else if(mapa.getCelula(i, j).isBomba()) {
-						matrizBotao[i][j].setText("B");			
+						matrizBotao[i][j].setText("B");	
 					}
 					
 					ajustarLetra(i,j);
