@@ -44,7 +44,7 @@ public class TelaJogo extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		panel.setBounds(12, 75, 500, 500);
+		panel.setBounds(12, 75, 900, 900);
 		contentPane.add(panel);
 		
 		
@@ -94,7 +94,6 @@ public class TelaJogo extends JFrame {
 				escolherPosicaoInterface(i,j);
 				// ACTION LISTENER DA MATRIZ
 				
-				
 				panel.add(matrizBotao[i][j]);
 				
 			}
@@ -108,8 +107,6 @@ public class TelaJogo extends JFrame {
 				
 				getMapa().escolherPosicao(i, j);	
 				
-				revelarEspacosInterface();
-				
 				if (getMapa().getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel()) {
 					matrizBotao[i][j].setBackground(Color.BLACK);
 					
@@ -122,6 +119,7 @@ public class TelaJogo extends JFrame {
 				else {
 					matrizBotao[i][j].setText("B");
 					matrizBotao[i][j].setBackground(Color.RED);
+					revelarEspacosInterface(true);
 					
 					TelaLoser loser = new TelaLoser();
 					
@@ -130,6 +128,8 @@ public class TelaJogo extends JFrame {
 				}
 				
 				ajustarLetra(i,j);
+				
+				revelarEspacosInterface(false);
 				
 				if(getMapa().verificarGanhouJogo() == true) {
 					TelaVencedor winner = new TelaVencedor();
@@ -144,22 +144,37 @@ public class TelaJogo extends JFrame {
 		
 	}
 	
-	public void revelarEspacosInterface() {
+	public void revelarEspacosInterface(boolean teste) {
 		
 		for (int i = 0; i < matrizBotao.length; i++) {
 			for (int j = 0; j < matrizBotao.length; j++) {
 				
-				if(getMapa().getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel() ) {
-					matrizBotao[i][j].setBackground(Color.BLACK);
+				if(teste == false) {
+					if(mapa.getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel() ) {
+						matrizBotao[i][j].setBackground(Color.BLACK);
+					}
+					else if(mapa.getCelula(i, j).getQtdBombasVizinhas() > 0 && getMapa().getCelula(i, j).isVisivel()) {
+						matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
+					}
+					else if(mapa.getCelula(i, j).getQtdBombasVizinhas() < 0 && getMapa().getCelula(i, j).isVisivel()) {
+						matrizBotao[i][j].setText("B");				
+					}
+					
+					ajustarLetra(i,j);
 				}
-				else if(getMapa().getCelula(i, j).getQtdBombasVizinhas() > 0 && getMapa().getCelula(i, j).isVisivel()) {
-					matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
+				else {
+					if(mapa.getCelula(i, j).isEmBranco() && !mapa.getCelula(i, j).isBomba()) {
+						matrizBotao[i][j].setBackground(Color.BLACK);
+					}
+					else if(mapa.getCelula(i, j).getQtdBombasVizinhas() > 0) {
+						matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
+					}
+					else if(mapa.getCelula(i, j).isBomba()) {
+						matrizBotao[i][j].setBackground(Color.RED);			
+					}
+					
+					ajustarLetra(i,j);
 				}
-				else if(getMapa().getCelula(i, j).getQtdBombasVizinhas() < 0 && getMapa().getCelula(i, j).isVisivel()) {
-					matrizBotao[i][j].setText("B");				
-				}
-				
-				ajustarLetra(i,j);
 				
 			}
 		}
