@@ -28,7 +28,7 @@ public class TelaLoser extends JFrame {
 	 */
 	public TelaLoser() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 705, 200);
+		setBounds(100, 100, 705, 700);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -39,7 +39,7 @@ public class TelaLoser extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 36));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\lucas\\git\\ProjetoLPOOnova\\campominado\\images\\opai.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon(".\\images\\opai.jpg"));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

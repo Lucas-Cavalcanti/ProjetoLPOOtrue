@@ -39,7 +39,7 @@ public class TelaVencedor extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 36));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\lucas\\git\\ProjetoLPOOnova\\campominado\\images\\bel-marques.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon(".\\images\\bel-marques.jpg"));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

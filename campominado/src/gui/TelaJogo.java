@@ -36,7 +36,7 @@ public class TelaJogo extends JFrame {
 	public TelaJogo(Dificuldade dificuldade) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1100, 1100);
+		setBounds(100, 100, 1500, 1500);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,7 +44,7 @@ public class TelaJogo extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		panel.setBounds(12, 75, 900, 900);
+		panel.setBounds(12, 75, 1400, 1400);
 		contentPane.add(panel);
 		
 		
@@ -170,7 +170,7 @@ public class TelaJogo extends JFrame {
 						matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
 					}
 					else if(mapa.getCelula(i, j).isBomba()) {
-						matrizBotao[i][j].setBackground(Color.RED);			
+						matrizBotao[i][j].setText("B");			
 					}
 					
 					ajustarLetra(i,j);
@@ -184,13 +184,13 @@ public class TelaJogo extends JFrame {
 	
 	public void ajustarLetra(int i, int j) {
 		if(this.mapa.getDificuldade() == Dificuldade.FACIL) {
-			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 30));
+			matrizBotao[i][j].setFont(new Font("Comic Sans", Font.BOLD, 30));
 		}
 		else if(this.mapa.getDificuldade() == Dificuldade.MEDIO) {
-			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 20));
+			matrizBotao[i][j].setFont(new Font("Comic Sans", Font.BOLD, 20));
 		}
 		else {
-			matrizBotao[i][j].setFont(new Font("Tahoma", Font.BOLD, 3));
+			matrizBotao[i][j].setFont(new Font("Comic Sans", Font.BOLD, 10));
 		}
 	}
 	
