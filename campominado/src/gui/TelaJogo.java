@@ -37,13 +37,15 @@ public class TelaJogo extends JFrame {
 	private Mapa mapa;
 	
 	private JLabel lblTempo;
+	
+	private JLabel lblTempo_1;
 
 	/**
 	 * Create the frame.
 	 */
 	
 	JPanel panel = new JPanel();
-	private JLabel lblTempo_1;
+	
 	
 	public TelaJogo(Dificuldade dificuldade) {
 		
@@ -118,6 +120,7 @@ public class TelaJogo extends JFrame {
 				
 				panel.add(matrizBotao[i][j]);
 				mouseListener(i,j);
+				fazerCronometro();
 				
 			}
 			
@@ -249,7 +252,7 @@ public class TelaJogo extends JFrame {
 			int segundosPassados = 0;
 			public void run() {
 				segundosPassados++;
-				System.out.println(segundosPassados);
+				lblTempo_1.setText("Tempo: " + Integer.toString(segundosPassados));
 			}
 		};
 		
