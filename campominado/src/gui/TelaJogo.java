@@ -46,7 +46,6 @@ public class TelaJogo extends JFrame {
 	
 	JPanel panel = new JPanel();
 	
-	
 	public TelaJogo(Dificuldade dificuldade) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
