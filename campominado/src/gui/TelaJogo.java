@@ -18,6 +18,7 @@ import br.com.poli.campoMinado.mapa.*;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.util.*;
+import javax.swing.JTextPane;
 
 public class TelaJogo extends JFrame {
 
@@ -45,7 +46,7 @@ public class TelaJogo extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		panel.setBounds(12, 75, 500, 500);
+		panel.setBounds(10, 75, 900, 900);
 		contentPane.add(panel);
 		
 		
@@ -118,7 +119,7 @@ public class TelaJogo extends JFrame {
 				}
 				
 				else {
-					matrizBotao[i][j].setText("B");
+					matrizBotao[i][j].setIcon(new ImageIcon(".\\images\\Icone_bomba.png"));	
 					matrizBotao[i][j].setBackground(Color.RED);
 					revelarEspacosInterface(true);
 					
@@ -155,7 +156,7 @@ public class TelaJogo extends JFrame {
 						matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
 					}
 					else if(mapa.getCelula(i, j).isBomba() && getMapa().getCelula(i, j).isVisivel()) {
-						matrizBotao[i][j].setText("B");				
+						matrizBotao[i][j].setIcon(new ImageIcon(".\\images\\Icone_bomba.png"));			
 					}
 					
 					ajustarLetra(i,j);
@@ -168,7 +169,7 @@ public class TelaJogo extends JFrame {
 						matrizBotao[i][j].setText( Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
 					}
 					else if(mapa.getCelula(i, j).isBomba()) {
-						matrizBotao[i][j].setText("B");	
+						matrizBotao[i][j].setIcon(new ImageIcon(".\\images\\Icone_bomba.png"));	
 					}
 					
 					ajustarLetra(i,j);
@@ -188,7 +189,7 @@ public class TelaJogo extends JFrame {
 			matrizBotao[i][j].setFont(new Font("Comic Sans", Font.BOLD, 20));
 		}
 		else {
-			matrizBotao[i][j].setFont(new Font("Comic Sans", Font.BOLD, 10));
+			matrizBotao[i][j].setFont(new Font("Comic Sans", Font.BOLD, 6));
 		}
 	}
 	
