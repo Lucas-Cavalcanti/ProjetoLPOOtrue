@@ -24,7 +24,7 @@ public class TelaMenu extends JFrame {
 
 	private JPanel contentPane;
 	
-	private TelaJogo tela;
+	protected TelaJogo tela;
 
 	/**
 	 * Launch the application.
@@ -120,4 +120,13 @@ public class TelaMenu extends JFrame {
 		}
 		ja.setVisible(false);
 	}
+
+	public TelaJogo getTela() {
+		return tela;
+	}
+
+	
+	
 }
+
+
