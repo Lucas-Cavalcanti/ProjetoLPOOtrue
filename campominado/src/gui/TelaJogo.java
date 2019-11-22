@@ -38,8 +38,12 @@ public class TelaJogo extends JFrame {
 	
 	private JLabel lblTempo;
 	
-	private JLabel lblTempo_1;
-
+	private JLabel contagemTempo;
+	
+	private Timer timer;
+	
+	private int count = 0;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -92,11 +96,14 @@ public class TelaJogo extends JFrame {
 		lblTempo.setBounds(389, 12, 121, 44);
 		contentPane.add(lblTempo);
 		
-		lblTempo_1 = new JLabel("Tempo: ");
-		lblTempo_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblTempo_1.setBounds(220, 11, 121, 44);
-		contentPane.add(lblTempo_1);
+		fazerCronometro();
+		
+		contagemTempo.setText("Tempo: 00:00:00");
+		contagemTempo.setFont(new Font("LCDMono2", Font.BOLD, 18));
+		contagemTempo.setBounds(220, 11, 159, 44);
+		contentPane.add(contagemTempo);
 		//****************************************************************
+		
 		
 		criarBotoes();
 		
@@ -119,7 +126,7 @@ public class TelaJogo extends JFrame {
 				
 				panel.add(matrizBotao[i][j]);
 				mouseListener(i,j);
-				fazerCronometro();
+				
 				
 			}
 			
@@ -166,6 +173,7 @@ public class TelaJogo extends JFrame {
 					dispose();
 					TelaMenu menu2 = new TelaMenu();
 					menu2.setVisible(true);
+					timer.cancel();
 					
 				}
 			}
@@ -201,6 +209,10 @@ public class TelaJogo extends JFrame {
 					}
 					
 					ajustarLetra(i,j);
+					
+					if(mapa.isGanhouJogo() == true || mapa.isFimDeJogo() == true) {
+						this.timer.cancel();
+					}
 				}
 				
 			}
@@ -246,16 +258,21 @@ public class TelaJogo extends JFrame {
 	}
 	
 	public void fazerCronometro() {
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-			int segundosPassados = 0;
+		contagemTempo = new JLabel();
+		this.timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
 			public void run() {
-				segundosPassados++;
-				lblTempo_1.setText("Tempo: " + Integer.toString(segundosPassados));
+				int seg,min,hora;
+				count++;
+				seg = count % 60;
+				min = count / 60;
+				hora = min / 60;
+				min %= 60;
+				contagemTempo.setText("Tempo: " + String.format("%02d:%02d:%02d", hora,min,seg));
 			}
-		};
+		}, 1000,1000);
 		
-		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 	
 	public void ajustarLetra(int i, int j) {
