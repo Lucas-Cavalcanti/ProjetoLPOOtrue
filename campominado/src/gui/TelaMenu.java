@@ -18,14 +18,19 @@ import br.com.poli.campoMinado.*;
 import br.com.poli.campoMinado.mapa.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 
 public class TelaMenu extends JFrame {
 
 	private JPanel contentPane;
 	
+	private Jogador jogador;
+	
 	protected TelaJogo tela;
-
+	
+	private JTextField text;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -33,7 +38,9 @@ public class TelaMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					TelaMenu frame = new TelaMenu();
+					
 					frame.setVisible(true);
 					
 					
@@ -49,6 +56,8 @@ public class TelaMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	
 	public TelaMenu() {
 //		chamaJanelaAbertura();
 		
@@ -61,10 +70,21 @@ public class TelaMenu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		text = new JTextField();
+		
+		text.setBounds(267,338,134,63);
+		text.setColumns(10);
+		contentPane.add(text);
+		
+		jogador = new Jogador(text.getText());
+		
+		System.out.print(jogador.getNome());
+
+		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"F\u00E1cil", "M\u00E9dio", "Dif\u00EDcil"}));
-		comboBox.setBounds(246, 201, 168, 84);
+		comboBox.setBounds(247, 179, 168, 84);
 		contentPane.add(comboBox);
 		
 		
@@ -108,12 +128,19 @@ public class TelaMenu extends JFrame {
 		btnNewButton_1.setBounds(267, 529, 134, 63);
 		contentPane.add(btnNewButton_1);
 		
+		
+		JLabel lblDigiteSeuNome = new JLabel("Digite seu nome");
+		lblDigiteSeuNome.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblDigiteSeuNome.setBounds(267, 301, 134, 31);
+		contentPane.add(lblDigiteSeuNome);
+		
+		
+		
 			
 	}
 	
-	public void chamaJanelaAbertura() {
+	public static void chamaJanelaAbertura() {
 		SplashScreen ja = new SplashScreen();
-		ja.setVisible(true);
 		try {
 			Thread.sleep(2000);
 		} catch (Exception e) {
@@ -124,9 +151,6 @@ public class TelaMenu extends JFrame {
 	public TelaJogo getTela() {
 		return tela;
 	}
-
-	
-	
 }
 
 

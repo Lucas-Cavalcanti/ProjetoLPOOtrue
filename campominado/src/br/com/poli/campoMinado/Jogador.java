@@ -6,6 +6,8 @@ public class Jogador {
 	
 	private String nome;
 	
+	private int tempo;
+	
 	//CONSTRUTOR
 	
 	public Jogador(String nome) {
@@ -20,6 +22,14 @@ public class Jogador {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public int getTempo() {
+		return tempo;
+	}
+
+	public void setTempo(int tempo) {
+		this.tempo = tempo;
 	}
 	
 	

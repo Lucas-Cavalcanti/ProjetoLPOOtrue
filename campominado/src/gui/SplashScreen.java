@@ -8,26 +8,26 @@ import javax.swing.JLabel;
 import javax.swing.JWindow;
 
 public class SplashScreen extends JWindow {
-	
+
 	private JLabel lbFigura;
 
 	public SplashScreen() {
 		super();
 		initGUI();
 	}
-	
+
 	private void initGUI() {
 		try {
-			{
+			
 				lbFigura = new JLabel();
 				getContentPane().add(lbFigura);
 				lbFigura.setBounds(0, 0, 660, 450);
-				lbFigura.setIcon(new ImageIcon("C:\\Users\\lucas\\git\\ProjetoLPOOnova\\campominado\\images\\Botaosair.png"));
-			}
+				lbFigura.setIcon(new ImageIcon(".\\images\\Botaosair.png"));
 			
+
 			// Posicionar centralizado
 			this.centralizaJanela();
-			
+
 			getContentPane().setLayout(null);
 			pack();
 			this.setSize(476, 315);
@@ -35,7 +35,7 @@ public class SplashScreen extends JWindow {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void centralizaJanela() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension d = tk.getScreenSize();
