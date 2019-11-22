@@ -76,11 +76,6 @@ public class TelaMenu extends JFrame {
 		text.setColumns(10);
 		contentPane.add(text);
 		
-		jogador = new Jogador(text.getText());
-		
-		System.out.print(jogador.getNome());
-
-		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"F\u00E1cil", "M\u00E9dio", "Dif\u00EDcil"}));
@@ -138,6 +133,10 @@ public class TelaMenu extends JFrame {
 						dispose();
 						break;
 				}
+				
+				jogador = new Jogador(text.getText());
+				
+				System.out.print(jogador.getNome());
 			}
 		});
 	}
