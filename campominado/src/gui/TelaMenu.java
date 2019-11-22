@@ -94,10 +94,31 @@ public class TelaMenu extends JFrame {
 		contentPane.add(lblCampoMinado);
 		
 		JButton btnNewButton = new JButton("JOGAR");
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		gerarMapas(comboBox,btnNewButton);
+		
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton.setBounds(267, 423, 134, 63);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("RANKING");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_1.setBounds(267, 529, 134, 63);
+		contentPane.add(btnNewButton_1);
+		
+		
+		JLabel lblDigiteSeuNome = new JLabel("Digite seu nome");
+		lblDigiteSeuNome.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblDigiteSeuNome.setBounds(267, 301, 134, 31);
+		contentPane.add(lblDigiteSeuNome);
+		
+	}
+	
+	public void gerarMapas(JComboBox cmb, JButton botao) {
+		botao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				switch(comboBox.getSelectedIndex()) {
+				switch(cmb.getSelectedIndex()) {
 				
 					case 0 : 
 						tela = new TelaJogo(Dificuldade.FACIL);
@@ -119,24 +140,6 @@ public class TelaMenu extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(267, 423, 134, 63);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("RANKING");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1.setBounds(267, 529, 134, 63);
-		contentPane.add(btnNewButton_1);
-		
-		
-		JLabel lblDigiteSeuNome = new JLabel("Digite seu nome");
-		lblDigiteSeuNome.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDigiteSeuNome.setBounds(267, 301, 134, 31);
-		contentPane.add(lblDigiteSeuNome);
-		
-		
-		
-			
 	}
 	
 	public static void chamaJanelaAbertura() {
