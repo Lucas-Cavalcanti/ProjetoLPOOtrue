@@ -101,8 +101,7 @@ public abstract class Mapa {
 		for (int i = 0; i < campo.length; i++) {
 			for (int j = 0; j < campo.length; j++) {
 				if (campo[i][j].isBomba() == false) { // CASO ACHE UMA CELULA QUE NÃO SEJA BOMBA, ENTRE
-					for (int i2 = (i - 1); i2 <= (i + 1); i2++) { // LOOP PARA VARRER OS ARREDORES DA CASA A SER
-																	// ANALISADA
+					for (int i2 = (i - 1); i2 <= (i + 1); i2++) { // LOOP PARA VARRER OS ARREDORES DA CASA A SER ANALISADA
 						for (int j2 = (j - 1); j2 <= (j + 1); j2++) {
 							if (i2 >= 0 && j2 >= 0 && i2 < campo.length && j2 < campo.length) { // IF PARA GARANTIR QUE AS CASAS ANALISADAS ESTÃO DENTRO DA MATRIZ
 								if (campo[i2][j2].isBomba() == true) {

@@ -134,11 +134,8 @@ public class TelaJogo extends JFrame {
 
 				getMapa().escolherPosicao(i, j);
 				
-				getMapa().contarVizinhosInviziveis();
-				
-				getMapa().contarVizinhosComBandeira();
 
-				if (getMapa().getCelulasVisiveis() == 1) {
+				if (getMapa().getCelulasVisiveis() == 1) { 
 					if (getMapa().getDificuldade() == Dificuldade.FACIL) {
 						TelaJogo t = new TelaJogo(Dificuldade.FACIL);
 						t.setVisible(true);
@@ -159,11 +156,12 @@ public class TelaJogo extends JFrame {
 					}
 
 				}
-
+					
 				if (getMapa().getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel()) {
 					matrizBotao[i][j].setBackground(Color.BLACK);
+					
 					revelarEspacosInterface(false);
-
+					
 				} else if (getMapa().getCelula(i, j).getQtdBombasVizinhas() > 0
 						&& getMapa().getCelula(i, j).isVisivel()) {
 					matrizBotao[i][j].setText(Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
@@ -191,6 +189,7 @@ public class TelaJogo extends JFrame {
 					menu2.setVisible(true);
 					timer.cancel();
 					
+					
 				}
 				
 			}
@@ -210,8 +209,9 @@ public class TelaJogo extends JFrame {
 							&& getMapa().getCelula(i, j).isVisivel()) {
 						matrizBotao[i][j].setText(Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
 					}
-					colocarBandeirasAuto();
-					selecionarCelulasAuto();
+					
+					
+					
 					ajustarLetra(i, j);
 				} else {
 					if (mapa.getCelula(i, j).isEmBranco() && !mapa.getCelula(i, j).isBomba()) {
@@ -341,7 +341,6 @@ public class TelaJogo extends JFrame {
 									
 									if (mapa.getCelula(i2, j2).isEmBranco() && mapa.getCelula(i2, j2).isBomba() == false && getMapa().getCelula(i2, j2).isVisivel() == false) {
 										matrizBotao[i2][j2].setBackground(Color.BLACK);
-										revelarEspacosInterface(false);
 										
 									} 
 									
