@@ -25,7 +25,7 @@ public class TelaMenu extends JFrame {
 
 	private JPanel contentPane;
 	
-	private Jogador jogador;
+	protected Jogador jogador;
 	
 	protected TelaJogo tela;
 	

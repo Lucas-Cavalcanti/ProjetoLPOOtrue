@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
@@ -10,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -23,12 +25,13 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.util.*;
 import javax.swing.JTextPane;
+import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 
 import java.util.*;
 
-public class TelaJogo extends JFrame {
+public class TelaJogo extends JWindow {
 
 	private JPanel contentPane;
 
@@ -52,15 +55,14 @@ public class TelaJogo extends JFrame {
 
 	public TelaJogo(Dificuldade dificuldade) {
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 1000);
+		setBounds(280, 0, 1500, 1100);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		panel.setBounds(10, 75, 500, 500);
+		panel.setBounds(10, 75, 1400, 910);
 		contentPane.add(panel);
 
 		if (dificuldade == Dificuldade.FACIL) {
@@ -149,7 +151,7 @@ public class TelaJogo extends JFrame {
 						return;
 					}
 					else {
-						TelaJogo t = new TelaJogo(Dificuldade.MEDIO);
+						TelaJogo t = new TelaJogo(Dificuldade.DIFICIL);
 						t.setVisible(true);
 						dispose();
 						return;
@@ -301,7 +303,7 @@ public class TelaJogo extends JFrame {
 		} else if (this.mapa.getDificuldade() == Dificuldade.MEDIO) {
 			matrizBotao[i][j].setFont(new Font("Comic Sans", Font.BOLD, 20));
 		} else {
-			matrizBotao[i][j].setFont(new Font("Comic Sans", Font.BOLD, 5));
+			matrizBotao[i][j].setFont(new Font("Comic Sans", Font.BOLD, 10));
 		}
 	}
 
