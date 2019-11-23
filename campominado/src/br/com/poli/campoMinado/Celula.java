@@ -12,9 +12,12 @@ public class Celula {
 	private int linha; //inicializado pelo construtor
 	private int coluna; //inicializado pelo construtor
 	private List<Celula> vizinhos = new ArrayList<Celula>();
-	
+	private int numCelulasVizinhasInviziveis;
+	private int numCelulasVizinhasComBandeira;
 	//CONSTRUTOR
 	
+	
+
 	public Celula(int linha, int coluna) {
 		this.linha=linha;
 		this.coluna=coluna;
@@ -41,6 +44,13 @@ public class Celula {
 		}
 	}
 	
+	
+	public int getNumCelulasVizinhasInviziveis() {
+		return numCelulasVizinhasInviziveis;
+	}
+	public void setNumCelulasVizinhasInviziveis(int numCelulasVizinhasViziveis) {
+		this.numCelulasVizinhasInviziveis = numCelulasVizinhasViziveis;
+	}
 	public boolean isBandeira() {
 		return bandeira;
 	}
@@ -88,4 +98,14 @@ public class Celula {
 	public void setVizinhos(List<Celula> vizinhos) {
 		this.vizinhos = vizinhos;
 	}
+
+	public int getNumCelulasVizinhasComBandeira() {
+		return numCelulasVizinhasComBandeira;
+	}
+
+	public void setNumCelulasVizinhasComBandeira(int numCelulasVizinhasComBandeira) {
+		this.numCelulasVizinhasComBandeira = numCelulasVizinhasComBandeira;
+	}
+
 }
+
