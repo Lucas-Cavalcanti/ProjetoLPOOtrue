@@ -74,6 +74,12 @@ public class TelaJogo extends JFrame {
 		panel.setLayout(new GridLayout(this.mapa.getDificuldade().getValor(), this.mapa.getDificuldade().getValor()));
 		
 		// *****************************************************************
+		JButton botaoIA = new JButton("IA");
+		botaoIA.setFont(new Font("Tahoma", Font.BOLD, 16));
+		botaoIA.setForeground(Color.BLACK);
+		botaoIA.setBounds(550, 13, 170, 44);
+		contentPane.add(botaoIA);
+
 		JButton btnNewButton = new JButton("Sair");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -156,7 +162,7 @@ public class TelaJogo extends JFrame {
 					}
 
 				}
-					
+				
 				if (getMapa().getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel()) {
 					matrizBotao[i][j].setBackground(Color.BLACK);
 					
@@ -179,7 +185,16 @@ public class TelaJogo extends JFrame {
 					menu.setVisible(true);
 
 				}
-
+				
+				mapa.contarVizinhosInviziveis();
+				
+				colocarBandeirasAuto();
+				
+				mapa.contarVizinhosComBandeira();
+							
+				
+				
+				
 				ajustarLetra(i, j);
 
 				if (getMapa().verificarGanhouJogo() == true) {
@@ -212,7 +227,6 @@ public class TelaJogo extends JFrame {
 					
 					
 					
-					
 					ajustarLetra(i, j);
 				} else {
 					if (mapa.getCelula(i, j).isEmBranco() && !mapa.getCelula(i, j).isBomba()) {
@@ -232,15 +246,6 @@ public class TelaJogo extends JFrame {
 			}
 		}
 		
-		mapa.contarVizinhosInviziveis();
-		
-		colocarBandeirasAuto();
-		
-		mapa.contarVizinhosComBandeira();
-		
-		//selecionarCelulasAuto();
-		
-		
 		
 		
 	}
@@ -257,21 +262,21 @@ public class TelaJogo extends JFrame {
 	}
 	
 	public void setarBandeira(int i, int j){
-		if (getMapa().getCelula(i, j).isVisivel() == false) {
-			if (getMapa().getCelula(i, j).isBandeira() == false) {
-				getMapa().getCelula(i, j).setBandeira(true);
+		if (mapa.getCelula(i, j).isVisivel() == false) {
+			if (mapa.getCelula(i, j).isBandeira() == false) {
+				mapa.getCelula(i, j).setBandeira(true);
 				getMatrizBotao(i, j).setIcon(new ImageIcon(".\\images\\Bandeira_luffy.png"));
 				getMatrizBotao(i, j).setEnabled(false);
 				lblTempo.setText("Bombas: " + Integer.toString(contadorBandeiras()));
 			} else {
-				getMapa().getCelula(i, j).setBandeira(false);
+				mapa.getCelula(i, j).setBandeira(false);
 				getMatrizBotao(i, j).setIcon(new ImageIcon(""));
 				getMatrizBotao(i, j).setEnabled(true);
 				lblTempo.setText("Bombas: " + Integer.toString(contadorBandeiras()));
 			}
 		}
 	}
-
+	
 	public int contadorBandeiras() {
 		int numCelBandeiras = 0;
 		for (int i = 0; i < matrizBotao.length; i++) {
