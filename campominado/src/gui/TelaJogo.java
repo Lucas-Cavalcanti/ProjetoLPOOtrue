@@ -232,6 +232,17 @@ public class TelaJogo extends JFrame {
 			}
 		}
 		
+		mapa.contarVizinhosInviziveis();
+		
+		colocarBandeirasAuto();
+		
+		mapa.contarVizinhosComBandeira();
+		
+		//selecionarCelulasAuto();
+		
+		
+		
+		
 	}
 
 	public void mouseListener(int i, int j) {
