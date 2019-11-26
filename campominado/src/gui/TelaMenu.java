@@ -97,7 +97,7 @@ public class TelaMenu extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("RANKING");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1.setBounds(267, 529, 134, 63);
+		btnNewButton_1.setBounds(267, 587, 134, 63);
 		contentPane.add(btnNewButton_1);
 		
 		
@@ -105,6 +105,11 @@ public class TelaMenu extends JFrame {
 		lblDigiteSeuNome.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblDigiteSeuNome.setBounds(267, 301, 134, 31);
 		contentPane.add(lblDigiteSeuNome);
+		
+		JButton botaoIa = new JButton("IA");
+		botaoIa.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		botaoIa.setBounds(267, 509, 134, 53);
+		contentPane.add(botaoIa);
 		
 	}
 	

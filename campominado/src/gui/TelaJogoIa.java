@@ -34,5 +34,5 @@ public class TelaJogoIa extends TelaJogo{
 		super(dificuldade);
 	}
 	
-
+	
 }

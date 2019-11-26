@@ -158,7 +158,7 @@ public abstract class Mapa {
 	}
 
 	public boolean verificarGanhouJogo() { // O MÉTODO SE TORNOU PUBLIC PARA PODES SER UTILIZADO NA INTERFACE
-		if (this.celulasVisiveis >= (this.dificuldade.getValor() * this.dificuldade.getValor()) - this.bombas) {
+		if (this.celulasVisiveis >= (this.dificuldade.getValor() * this.dificuldade.getValor()) - this.bombas && this.fimDeJogo == false) {
 			System.out.println("VOCÊ GANHOU O JOGO!!!!");
 			return true;
 		} else {

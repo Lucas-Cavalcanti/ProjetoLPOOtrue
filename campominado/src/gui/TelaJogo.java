@@ -74,11 +74,6 @@ public class TelaJogo extends JFrame {
 		panel.setLayout(new GridLayout(this.mapa.getDificuldade().getValor(), this.mapa.getDificuldade().getValor()));
 		
 		// *****************************************************************
-		JButton botaoIA = new JButton("IA");
-		botaoIA.setFont(new Font("Tahoma", Font.BOLD, 16));
-		botaoIA.setForeground(Color.BLACK);
-		botaoIA.setBounds(550, 13, 170, 44);
-		contentPane.add(botaoIA);
 
 		JButton btnNewButton = new JButton("Sair");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -88,7 +83,7 @@ public class TelaJogo extends JFrame {
 			}
 		});
 		btnNewButton.setIcon(new ImageIcon(".\\images\\Botaosair.png"));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setBounds(12, 13, 170, 44);
 		contentPane.add(btnNewButton);
@@ -104,14 +99,16 @@ public class TelaJogo extends JFrame {
 		contagemTempo.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		contagemTempo.setBounds(220, 11, 159, 44);
 		contentPane.add(contagemTempo);
+		
+		
 		// ****************************************************************
 
-		criarBotoes();
+		criarBotoes(true);
 		
 		
 	}
 
-	public void criarBotoes() {
+	public void criarBotoes(boolean flag) {
 
 		this.matrizBotao = new JButton[this.mapa.getDificuldade().getValor()][this.mapa.getDificuldade().getValor()];
 
@@ -121,13 +118,35 @@ public class TelaJogo extends JFrame {
 				// ACTION LISTENER DA MATRIZ
 				matrizBotao[i][j] = new JButton();
 				matrizBotao[i][j].setBackground(Color.YELLOW);
-
-				escolherPosicaoInterface(i, j);
-				// ACTION LISTENER DA MATRIZ
+				
+				if(flag == true) { //JOGO NORMAL, SEM IA
+					escolherPosicaoInterface(i, j);
+					
+					mouseListener(i, j);
+				}
+				
+				else {
+					Random geraBomba = new Random();
+					int linha = 0;
+					int coluna = 0;
+					
+					do {
+						linha = geraBomba.nextInt(this.matrizBotao.length);
+						coluna = geraBomba.nextInt(this.matrizBotao.length);
+					}while(mapa.getCelula(linha, coluna).getQtdBombasVizinhas() > 0 || mapa.getCelula(linha, coluna).isBomba() == true);
+					
+					mapa.escolherPosicao(linha, coluna);
+					
+					revelarEspacosInterface(false);
+					
+					mapa.contarVizinhosInviziveis();
+					
+					colocarBandeirasAuto();
+				}
 				
 
 				panel.add(matrizBotao[i][j]);
-				mouseListener(i, j);
+				
 
 			}
 
@@ -183,17 +202,8 @@ public class TelaJogo extends JFrame {
 					dispose();
 					TelaMenu menu = new TelaMenu();
 					menu.setVisible(true);
-
+					
 				}
-				
-				mapa.contarVizinhosInviziveis();
-				
-				colocarBandeirasAuto();
-				
-				mapa.contarVizinhosComBandeira();
-							
-				
-				
 				
 				ajustarLetra(i, j);
 
@@ -344,6 +354,7 @@ public class TelaJogo extends JFrame {
 				}
 			}
 		}
+		revelarEspacosInterface(false);
 		
 	}
 	
@@ -362,14 +373,13 @@ public class TelaJogo extends JFrame {
 									
 									if (mapa.getCelula(i2, j2).isEmBranco()) {
 										matrizBotao[i2][j2].setBackground(Color.BLACK);
-										revelarEspacosInterface(false);
-										
 									} 
 									
 									else if (mapa.getCelula(i2, j2).getQtdBombasVizinhas() > 0) {
 										matrizBotao[i2][j2].setText(Integer.toString(getMapa().getCelula(i2, j2).getQtdBombasVizinhas()));
 									}
 									
+									revelarEspacosInterface(false);
 								}
 							}
 						}
