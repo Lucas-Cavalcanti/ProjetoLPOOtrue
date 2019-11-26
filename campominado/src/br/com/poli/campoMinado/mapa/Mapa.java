@@ -30,7 +30,7 @@ public abstract class Mapa {
 																							// CAMPO
 
 		inicializaCelulas();
-
+		
 		distribuirBombas(this.bombas);
 
 		contarBombas();
@@ -59,7 +59,7 @@ public abstract class Mapa {
 		int coluna = 0;
 
 		for (int i = 0; i < bombas; i++) {
-
+			
 			do {
 
 				linha = geraBomba.nextInt(campo.length);
@@ -147,6 +147,7 @@ public abstract class Mapa {
 						campo[i][j].setVisivel(true);
 					} else if (campo[i][j].isVisivel() == false && campo[i][j].getQtdBombasVizinhas() == 0) {
 						this.celulasVisiveis++;
+						celulaEscolhida.setVisivel(true);
 						revelarEspacos(getCelula(i, j)); // ESSA CHAMADA GARANTE A VARREDURA DE TODAS AS CASAS
 															// ADJASCENTES AOS 0s
 					}
@@ -174,7 +175,7 @@ public abstract class Mapa {
 			for (int j = 0; j < campo.length; j++) {
 				for (int i2 = (i - 1); i2 <= (i + 1); i2++) { // LOOP PARA VARRER OS ARREDORES DA CASA A SER ANALISADA
 					for (int j2 = (j - 1); j2 <= (j + 1); j2++) {
-						if (i2 > 0 && j2 > 0 && i2 < campo.length && j2 < campo.length) {
+						if (i2 >= 0 && j2 >= 0 && i2 < campo.length && j2 < campo.length) {
 							if (campo[i2][j2].isVisivel() == false) {
 								campo[i][j].setNumCelulasVizinhasInviziveis(campo[i][j].getNumCelulasVizinhasInviziveis() + 1);
 							}
@@ -190,7 +191,7 @@ public abstract class Mapa {
 			for (int j = 0; j < campo.length; j++) {
 				for (int i2 = (i - 1); i2 <= (i + 1); i2++) { // LOOP PARA VARRER OS ARREDORES DA CASA A SER ANALISADA
 					for (int j2 = (j - 1); j2 <= (j + 1); j2++) {
-						if (i2 > 0 && j2 > 0 && i2 < campo.length && j2 < campo.length) {
+						if (i2 >= 0 && j2 >= 0 && i2 < campo.length && j2 < campo.length) {
 							if(campo[i2][j2].isBandeira() == true) {
 								campo[i][j].setNumCelulasVizinhasComBandeira(campo[i][j].getNumCelulasVizinhasComBandeira() + 1);
 							}
