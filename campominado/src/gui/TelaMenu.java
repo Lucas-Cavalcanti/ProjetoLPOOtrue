@@ -31,6 +31,8 @@ public class TelaMenu extends JFrame {
 	
 	private JTextField text;
 	
+	private JLabel lblDigiteSeuNome;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -101,7 +103,7 @@ public class TelaMenu extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		
-		JLabel lblDigiteSeuNome = new JLabel("Digite seu nome");
+		lblDigiteSeuNome = new JLabel("Digite seu nome");
 		lblDigiteSeuNome.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblDigiteSeuNome.setBounds(267, 301, 134, 31);
 		contentPane.add(lblDigiteSeuNome);
@@ -157,6 +159,16 @@ public class TelaMenu extends JFrame {
 	public TelaJogo getTela() {
 		return tela;
 	}
+
+	public JLabel getLblDigiteSeuNome() {
+		return lblDigiteSeuNome;
+	}
+
+	public void setLblDigiteSeuNome(JLabel lblDigiteSeuNome) {
+		this.lblDigiteSeuNome = lblDigiteSeuNome;
+	}
+	
+	
 }
 
 

@@ -300,7 +300,7 @@ public class TelaJogo extends JFrame {
 		}
 		return (mapa.getBombas() - numCelBandeiras);
 	}
-
+	
 	public void fazerCronometro() {
 		contagemTempo = new JLabel();
 		this.timer = new Timer();
@@ -316,7 +316,12 @@ public class TelaJogo extends JFrame {
 				contagemTempo.setText("Tempo: " + String.format("%02d:%02d:%02d", hora, min, seg));
 			}
 		}, 1000, 1000);
-		
+		try {
+			Thread.sleep(1400);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void ajustarLetra(int i, int j) {
