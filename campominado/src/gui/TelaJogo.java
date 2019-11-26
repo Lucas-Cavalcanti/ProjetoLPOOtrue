@@ -1,40 +1,37 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.awt.GridBagLayout;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import br.com.poli.campoMinado.*;
-import br.com.poli.campoMinado.mapa.*;
-import java.awt.Font;
 import javax.swing.ImageIcon;
-import java.util.*;
-import javax.swing.JTextPane;
-import javax.swing.JWindow;
-import javax.swing.SwingUtilities;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
-import java.util.*;
+import br.com.poli.campoMinado.Dificuldade;
+import br.com.poli.campoMinado.Jogador;
+import br.com.poli.campoMinado.mapa.Mapa;
+import br.com.poli.campoMinado.mapa.MapaDificil;
+import br.com.poli.campoMinado.mapa.MapaFacil;
+import br.com.poli.campoMinado.mapa.MapaMedio;
 
 public class TelaJogo extends JFrame {
 
 	private JPanel contentPane;
+	
+	private Ranking ranking;
 
 	private JButton matrizBotao[][];
 
@@ -45,15 +42,18 @@ public class TelaJogo extends JFrame {
 	private JLabel contagemTempo;
 
 	private Timer timer;
+	
+	private Jogador jogador;
 
 	private int count = 0;
 	
 
 	JPanel panel = new JPanel();
 
-	public TelaJogo(Dificuldade dificuldade) {
+	public TelaJogo(Dificuldade dificuldade, String nome) {
 
 		setBounds(280, 0, 800, 800);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,6 +70,10 @@ public class TelaJogo extends JFrame {
 		} else if (dificuldade == Dificuldade.DIFICIL) {
 			mapa = new MapaDificil();
 		}
+		
+		jogador = new Jogador(nome);
+		
+		System.out.println(jogador.getNome());
 
 		panel.setLayout(new GridLayout(this.mapa.getDificuldade().getValor(), this.mapa.getDificuldade().getValor()));
 		
@@ -103,57 +107,37 @@ public class TelaJogo extends JFrame {
 		
 		// ****************************************************************
 
-		criarBotoes(true);
+		criarBotoes();
 		
 		
 	}
 
-	public void criarBotoes(boolean flag) {
+	public void criarBotoes() {
 
-		this.matrizBotao = new JButton[this.mapa.getDificuldade().getValor()][this.mapa.getDificuldade().getValor()];
+        this.matrizBotao = new JButton[this.mapa.getDificuldade().getValor()][this.mapa.getDificuldade().getValor()];
 
-		for (int i = 0; i < this.matrizBotao.length; i++) {
-			for (int j = 0; j < this.matrizBotao.length; j++) {
+        for (int i = 0; i < this.matrizBotao.length; i++) {
+            for (int j = 0; j < this.matrizBotao.length; j++) {
 
-				// ACTION LISTENER DA MATRIZ
-				matrizBotao[i][j] = new JButton();
-				matrizBotao[i][j].setBackground(Color.YELLOW);
-				
-				if(flag == true) { //JOGO NORMAL, SEM IA
-					escolherPosicaoInterface(i, j);
-					
-					mouseListener(i, j);
-				}
-				
-				else {
-					Random geraBomba = new Random();
-					int linha = 0;
-					int coluna = 0;
-					
-					do {
-						linha = geraBomba.nextInt(this.matrizBotao.length);
-						coluna = geraBomba.nextInt(this.matrizBotao.length);
-					}while(mapa.getCelula(linha, coluna).getQtdBombasVizinhas() > 0 || mapa.getCelula(linha, coluna).isBomba() == true);
-					
-					mapa.escolherPosicao(linha, coluna);
-					
-					revelarEspacosInterface(false);
-					
-					mapa.contarVizinhosInviziveis();
-					
-					colocarBandeirasAuto();
-				}
-				
+         
+            	
+                matrizBotao[i][j] = new JButton();
+                matrizBotao[i][j].setBackground(Color.YELLOW);
 
-				panel.add(matrizBotao[i][j]);
-				
+                escolherPosicaoInterface(i, j, jogador);
+                
+       
 
-			}
 
-		}
-	}
+                panel.add(matrizBotao[i][j]);
+                mouseListener(i, j);
 
-	public void escolherPosicaoInterface(int i, int j) {
+            }
+
+        }
+    }
+
+	public void escolherPosicaoInterface(int i, int j, Jogador jogador) {
 		matrizBotao[i][j].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -162,19 +146,19 @@ public class TelaJogo extends JFrame {
 
 				if (getMapa().getCelulasVisiveis() == 1) { 
 					if (getMapa().getDificuldade() == Dificuldade.FACIL) {
-						TelaJogo t = new TelaJogo(Dificuldade.FACIL);
+						TelaJogo t = new TelaJogo(Dificuldade.FACIL, jogador.getNome());
 						t.setVisible(true);
 						dispose();
 						return;
 					}
 					else if(getMapa().getDificuldade()  == Dificuldade.MEDIO) {
-						TelaJogo t = new TelaJogo(Dificuldade.MEDIO);
+						TelaJogo t = new TelaJogo(Dificuldade.MEDIO, jogador.getNome());
 						t.setVisible(true);
 						dispose();
 						return;
 					}
 					else {
-						TelaJogo t = new TelaJogo(Dificuldade.DIFICIL);
+						TelaJogo t = new TelaJogo(Dificuldade.DIFICIL, jogador.getNome());
 						t.setVisible(true);
 						dispose();
 						return;
@@ -198,7 +182,9 @@ public class TelaJogo extends JFrame {
 					matrizBotao[i][j].setBackground(Color.RED);
 					revelarEspacosInterface(true);
 					timer.cancel();
-					JOptionPane.showMessageDialog(null, "Voce perdeu");
+					
+					JOptionPane.showMessageDialog(null, jogador.getNome() +  ", Você perdeu !! ");
+					
 					dispose();
 					TelaMenu menu = new TelaMenu();
 					menu.setVisible(true);
@@ -209,7 +195,10 @@ public class TelaJogo extends JFrame {
 
 				if (getMapa().verificarGanhouJogo() == true) {
 					timer.cancel();
-					JOptionPane.showMessageDialog(null, "Parabéns, voce ganhou!");
+					
+					ranking = new Ranking(jogador, mapa.getDificuldade());
+					
+					JOptionPane.showMessageDialog(null, jogador.getNome() + ", Parabéns, você ganhou !! ");
 					dispose();
 					TelaMenu menu2 = new TelaMenu();
 					menu2.setVisible(true);
@@ -314,6 +303,7 @@ public class TelaJogo extends JFrame {
 				hora = min / 60;
 				min %= 60;
 				contagemTempo.setText("Tempo: " + String.format("%02d:%02d:%02d", hora, min, seg));
+				jogador.setTempo(count);
 			}
 		}, 1000, 1000);
 		try {
