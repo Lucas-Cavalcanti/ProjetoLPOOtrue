@@ -12,68 +12,103 @@ import br.com.poli.campoMinado.mapa.*;
 import gui.*;
 
 public class Ranking {
+
+	private List<Jogador> listaJogadores = new ArrayList<Jogador>();
+
+	private FileWriter fileF;
+
+	private File file;
+
+	private FileReader ler1;
+
+	private int tamanho;
 	
-	
-	
-	public Ranking(Jogador jogador, Dificuldade difi) {
-		
-		
+	private RankingOrdenado ro; 
+
+	public Ranking() {
+
 		try {
 			
-			FileWriter fac = new FileWriter("RankingFacil.txt", true);
-			FileWriter med = new FileWriter("RankingMedio.txt", true);
-			FileWriter dif = new FileWriter("RankingDificil.txt", true);
+			ro = new RankingOrdenado(Dificuldade.FACIL);
 			
-			jogador.getListaJogadores().add(jogador);
+			ro.tamanhoArquivo();
 			
-			if(jogador.getListaJogadores().size() > 1 ) {
-				jogador.ordenarArrayList();
+			for(Jogador i: ro.registrarJogadores()) {
+				listaJogadores.add(i);
 			}
-			
-			
+
+			listaJogadores.add(new Jogador("lucas"));
+
+			fileF = new FileWriter("RankingFacil.txt", true);
+
+			PrintWriter pr = new PrintWriter(fileF);
+
+			for (int i = 0; i < listaJogadores.size(); i++) {
+				pr.println(listaJogadores.get(i).getNome() + "\n" + listaJogadores.get(i).getTempo());
+
+			}
+
+			fileF.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public Ranking(Jogador jogador, Dificuldade difi) {
+
+		try {
+
+			listaJogadores.add(new Jogador("lucas"));
+
 			if (difi == Dificuldade.FACIL) {
-				
-				PrintWriter pr = new PrintWriter(fac);
-			
-				for (int i = 0; i < jogador.getListaJogadores().size(); i++) {
-                    pr.println(jogador.getListaJogadores().get(i).getNome() + "  :  " + jogador.getListaJogadores().get(i).getTempo());
-                    
-                }
-				
-				pr.close();
-				
+
+				fileF = new FileWriter("RankingFacil.txt", true);
+
+				PrintWriter pr = new PrintWriter(fileF);
+
+				for (int i = 0; i < listaJogadores.size(); i++) {
+					pr.println(listaJogadores.get(i).getNome() + "\n" + listaJogadores.get(i).getTempo());
+
+				}
+
+				fileF.close();
+
 			}
-			
+
 			else if (difi == Dificuldade.MEDIO) {
-				
-				PrintWriter pr = new PrintWriter(med);
-				
-				pr.write(jogador.getNome() + "  :  " + jogador.getTempo());
-				
+
+				fileF = new FileWriter("RankingMedio.txt", true);
+
+				PrintWriter pr = new PrintWriter(fileF);
+
 				pr.close();
-				
+
 			}
-			
+
 			else if (difi == Dificuldade.DIFICIL) {
 
-				PrintWriter pr = new PrintWriter(dif);
-				
-				pr.write(jogador.getNome() + "  :  " + jogador.getTempo());
-				
+				fileF = new FileWriter("RankingDificil.txt", true);
+
+				PrintWriter pr = new PrintWriter(fileF);
+
 				pr.close();
-				
+
 			}
-			
-			
-			
-		} catch(IOException e) {
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void ordenarArrayList() {
-		
-		
+		Collections.sort(listaJogadores, new Comparator<Jogador>() {
+			@Override
+			public int compare(Jogador j1, Jogador j2) {
+				return Integer.valueOf(j1.getTempo()).compareTo(j2.getTempo());
+			}
+		});
 	}
 
 }

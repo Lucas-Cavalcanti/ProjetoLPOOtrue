@@ -31,6 +31,7 @@ public class TelaJogo extends JFrame {
 
 	private JPanel contentPane;
 	
+	@SuppressWarnings("unused")
 	private Ranking ranking;
 
 	private JButton matrizBotao[][];
@@ -186,7 +187,7 @@ public class TelaJogo extends JFrame {
 					ranking = new Ranking(jogador, mapa.getDificuldade());
 					
 					JOptionPane.showMessageDialog(null, jogador.getNome() +  ", Você perdeu !! ");
-					dispose();
+				dispose();
 					TelaMenu menu = new TelaMenu();
 					menu.setVisible(true);
 					

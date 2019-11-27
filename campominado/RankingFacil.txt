@@ -1,3 +1,12 @@
-ddddd  :  5
-aaaaaaaaa  :  3
-ccccccc  :  3
+Daniel
+12
+gabriel
+13
+lucas2
+22
+kakaka
+2
+renato
+43
+lucia
+54

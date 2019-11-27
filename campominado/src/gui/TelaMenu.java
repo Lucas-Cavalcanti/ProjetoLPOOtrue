@@ -98,6 +98,13 @@ public class TelaMenu extends JFrame {
 		btnNewButton_1.setBounds(267, 587, 134, 63);
 		contentPane.add(btnNewButton_1);
 		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Ranking ranking = new Ranking();
+				
+			}
+		});
+		
 		
 		lblDigiteSeuNome = new JLabel("Digite seu nome");
 		lblDigiteSeuNome.setFont(new Font("Tahoma", Font.BOLD, 16));
