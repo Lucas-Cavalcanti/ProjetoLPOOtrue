@@ -2,7 +2,9 @@ package gui;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Comparator;
 
 import br.com.poli.campoMinado.*;
 import br.com.poli.campoMinado.mapa.*;
@@ -11,25 +13,32 @@ import gui.*;
 
 public class Ranking {
 	
-	private List<Jogador> listaJogadores = new ArrayList<Jogador>();
+	
 	
 	public Ranking(Jogador jogador, Dificuldade difi) {
 		
+		
 		try {
-			
-			listaJogadores.add(jogador);
 			
 			FileWriter fac = new FileWriter("RankingFacil.txt", true);
 			FileWriter med = new FileWriter("RankingMedio.txt", true);
 			FileWriter dif = new FileWriter("RankingDificil.txt", true);
-
+			
+			jogador.getListaJogadores().add(jogador);
+			
+			if(jogador.getListaJogadores().size() > 1 ) {
+				jogador.ordenarArrayList();
+			}
 			
 			
 			if (difi == Dificuldade.FACIL) {
 				
 				PrintWriter pr = new PrintWriter(fac);
-				
-				pr.write("\n" + jogador.getNome() + "  :  " + jogador.getTempo());
+			
+				for (int i = 0; i < jogador.getListaJogadores().size(); i++) {
+                    pr.println(jogador.getListaJogadores().get(i).getNome() + "  :  " + jogador.getListaJogadores().get(i).getTempo());
+                    
+                }
 				
 				pr.close();
 				
@@ -62,6 +71,9 @@ public class Ranking {
 		}
 	}
 	
-	
+	public void ordenarArrayList() {
+		
+		
+	}
 
 }
