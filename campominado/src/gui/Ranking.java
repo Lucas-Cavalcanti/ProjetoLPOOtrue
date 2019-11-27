@@ -14,14 +14,22 @@ public class Ranking {
 	private List<Jogador> listaJogadores = new ArrayList<Jogador>();
 	
 	public Ranking(Jogador jogador, Dificuldade difi) {
+		
 		try {
+			
+			listaJogadores.add(jogador);
+			
+			FileWriter fac = new FileWriter("RankingFacil.txt", true);
+			FileWriter med = new FileWriter("RankingMedio.txt", true);
+			FileWriter dif = new FileWriter("RankingDificil.txt", true);
+
+			
 			
 			if (difi == Dificuldade.FACIL) {
 				
-				FileWriter fr = new FileWriter("RankingFacil.txt");
-				PrintWriter pr = new PrintWriter(fr);
+				PrintWriter pr = new PrintWriter(fac);
 				
-				pr.write(jogador.getNome() + "  :  " + jogador.getTempo());
+				pr.write("\n" + jogador.getNome() + "  :  " + jogador.getTempo());
 				
 				pr.close();
 				
@@ -29,8 +37,7 @@ public class Ranking {
 			
 			else if (difi == Dificuldade.MEDIO) {
 				
-				FileWriter fr = new FileWriter("RankingMedio.txt");
-				PrintWriter pr = new PrintWriter(fr);
+				PrintWriter pr = new PrintWriter(med);
 				
 				pr.write(jogador.getNome() + "  :  " + jogador.getTempo());
 				
@@ -39,9 +46,8 @@ public class Ranking {
 			}
 			
 			else if (difi == Dificuldade.DIFICIL) {
-				
-				FileWriter fr = new FileWriter("RankingDificil.txt");
-				PrintWriter pr = new PrintWriter(fr);
+
+				PrintWriter pr = new PrintWriter(dif);
 				
 				pr.write(jogador.getNome() + "  :  " + jogador.getTempo());
 				

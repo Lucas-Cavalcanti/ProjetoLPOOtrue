@@ -183,8 +183,9 @@ public class TelaJogo extends JFrame {
 					revelarEspacosInterface(true);
 					timer.cancel();
 					
-					JOptionPane.showMessageDialog(null, jogador.getNome() +  ", Você perdeu !! ");
+					ranking = new Ranking(jogador, mapa.getDificuldade());
 					
+					JOptionPane.showMessageDialog(null, jogador.getNome() +  ", Você perdeu !! ");
 					dispose();
 					TelaMenu menu = new TelaMenu();
 					menu.setVisible(true);
