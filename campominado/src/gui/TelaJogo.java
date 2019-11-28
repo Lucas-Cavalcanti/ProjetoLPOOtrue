@@ -135,11 +135,6 @@ public class TelaJogo extends JFrame {
 					
 					string = JOptionPane.showInputDialog(null, "Digite seu nome: ", "Vitória", 1);
 					
-					jogador.setNome(string);
-					
-					ranking = new Ranking(jogador, mapa.getDificuldade());
-					
-					JOptionPane.showMessageDialog(null, jogador.getNome() + ", Parabéns, você ganhou !! ");
 					dispose();
 					TelaMenu menu2 = new TelaMenu();
 					menu2.setVisible(true);
@@ -225,12 +220,6 @@ public class TelaJogo extends JFrame {
 					revelarEspacosInterface(true);
 					timer.cancel();
 					
-					string = JOptionPane.showInputDialog(null, "Digite seu nome: ", "Vitória", 1);
-					
-					jogador.setNome(string);
-					
-					ranking = new Ranking(jogador, mapa.getDificuldade());
-					
 					JOptionPane.showMessageDialog(null, jogador.getNome() +  ", Você perdeu !! ");
 					dispose();
 					TelaMenu menu = new TelaMenu();
@@ -244,7 +233,11 @@ public class TelaJogo extends JFrame {
 					
 					timer.cancel();
 					
+					string = JOptionPane.showInputDialog(null, "Digite seu nome: ", "Vitória", 1);
 					
+					jogador.setNome(string);
+					
+					ranking = new Ranking(jogador, mapa.getDificuldade());
 					
 					JOptionPane.showMessageDialog(null, jogador.getNome() + ", Parabéns, você ganhou !! ");
 					dispose();
