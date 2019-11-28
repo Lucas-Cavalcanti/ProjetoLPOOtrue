@@ -31,6 +31,8 @@ public class Ranking {
 	
 	private BufferedReader bfac;	
 	
+	private BufferedReader bmed;
+	
 	private Jogador jogador;
 	
 	private int tamanho;
@@ -49,7 +51,7 @@ public class Ranking {
 		this.flag = flag;
 		this.dificuldade = dificuldade;
 		
-		adicionarJogadorNoRanking();
+		adicionarJogadorNoRanking(false);
 		
 		lerArquivo();
 		
@@ -64,7 +66,7 @@ public class Ranking {
 		this.jogador = jogador;
 		this.dificuldade = dificuldade;
 		
-		adicionarJogadorNoRanking();
+		adicionarJogadorNoRanking(true);
 		
 		lerArquivo();
 		
@@ -75,7 +77,7 @@ public class Ranking {
 		}
 	}
 	
-	public void adicionarJogadorNoRanking() {
+	public void adicionarJogadorNoRanking(boolean flag) {
 		try {
 			
 			if(flag == true) {
@@ -155,13 +157,16 @@ public class Ranking {
 		
 		bfac = new BufferedReader(fileR2);
 		
+		bmed = new BufferedReader(fileR2);
+		
+		
 		for(int i = 0; i < arrayj.length; i++) {
 			arrayj[i] = new Jogador();
 		}
 		
 		try {
 			do {
-				linha = this.bfac.readLine();
+				linha = this.bmed.readLine();
 				
 				if (contador2 < arrayj.length) {
 					if(contador % 2 == 0) {
@@ -182,7 +187,8 @@ public class Ranking {
 			for (int i = 0; i < arrayj.length; i++) {
 				this.listaJogNova.add(arrayj[i]);
 			}
-			
+			this.contador = 0;
+			this.contador2 = 0;
 		}
 		 catch(IOException e) {
 			e.printStackTrace();
