@@ -46,13 +46,17 @@ public class TelaJogo extends JFrame {
 	
 	private Jogador jogador;
 
-	private int count = 0;
+	private int count;
+	
+	private String string;
 	
 
 	JPanel panel = new JPanel();
 
-	public TelaJogo(Dificuldade dificuldade, String nome) {
-
+	public TelaJogo(Dificuldade dificuldade) {
+		
+		this.jogador = new Jogador();
+		
 		setBounds(280, 0, 800, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -72,10 +76,7 @@ public class TelaJogo extends JFrame {
 			mapa = new MapaDificil();
 		}
 		
-		jogador = new Jogador(nome);
 		
-		System.out.println(jogador.getNome());
-
 		panel.setLayout(new GridLayout(this.mapa.getDificuldade().getValor(), this.mapa.getDificuldade().getValor()));
 		
 		// *****************************************************************
@@ -92,7 +93,7 @@ public class TelaJogo extends JFrame {
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setBounds(12, 13, 170, 44);
 		contentPane.add(btnNewButton);
-
+		
 		this.lblTempo = new JLabel("Bombas: " + (Integer.toString(mapa.getBombas())));
 		lblTempo.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		lblTempo.setBounds(389, 12, 121, 44);
@@ -104,6 +105,49 @@ public class TelaJogo extends JFrame {
 		contagemTempo.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		contagemTempo.setBounds(220, 11, 159, 44);
 		contentPane.add(contagemTempo);
+		
+		JButton btnColocarBandeirasAuto = new JButton("Colocar Bandeiras Auto");
+		btnColocarBandeirasAuto.setMargin(new Insets(0,0,0,0));
+		btnColocarBandeirasAuto.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnColocarBandeirasAuto.setBounds(620, 75, 145, 44);
+		contentPane.add(btnColocarBandeirasAuto);
+		
+		btnColocarBandeirasAuto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				getMapa().contarVizinhosInviziveis();
+				colocarBandeirasAuto();
+			}
+		});
+		
+		JButton btnSelecionarCelulasAuto = new JButton("Selecionar Celulas Auto");
+		btnSelecionarCelulasAuto.setMargin(new Insets(0,0,0,0));
+		btnSelecionarCelulasAuto.setBounds(620, 130, 145, 44);
+		contentPane.add(btnSelecionarCelulasAuto);
+		
+		btnSelecionarCelulasAuto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				getMapa().contarVizinhosComBandeira();
+				selecionarCelulasAuto();
+				
+				if (getMapa().verificarGanhouJogo() == true) {
+					
+					timer.cancel();
+					
+					string = JOptionPane.showInputDialog(null, "Digite seu nome: ", "Vitória", 1);
+					
+					jogador.setNome(string);
+					
+					ranking = new Ranking(jogador, mapa.getDificuldade());
+					
+					JOptionPane.showMessageDialog(null, jogador.getNome() + ", Parabéns, você ganhou !! ");
+					dispose();
+					TelaMenu menu2 = new TelaMenu();
+					menu2.setVisible(true);
+					
+					
+				}
+			}
+		});
 		
 		
 		// ****************************************************************
@@ -127,12 +171,9 @@ public class TelaJogo extends JFrame {
 
                 escolherPosicaoInterface(i, j, jogador);
                 
-       
-
-
-                panel.add(matrizBotao[i][j]);
                 mouseListener(i, j);
-
+                
+				panel.add(matrizBotao[i][j]);
             }
 
         }
@@ -147,19 +188,19 @@ public class TelaJogo extends JFrame {
 
 				if (getMapa().getCelulasVisiveis() == 1) { 
 					if (getMapa().getDificuldade() == Dificuldade.FACIL) {
-						TelaJogo t = new TelaJogo(Dificuldade.FACIL, jogador.getNome());
+						TelaJogo t = new TelaJogo(Dificuldade.FACIL);
 						t.setVisible(true);
 						dispose();
 						return;
 					}
 					else if(getMapa().getDificuldade()  == Dificuldade.MEDIO) {
-						TelaJogo t = new TelaJogo(Dificuldade.MEDIO, jogador.getNome());
+						TelaJogo t = new TelaJogo(Dificuldade.MEDIO);
 						t.setVisible(true);
 						dispose();
 						return;
 					}
 					else {
-						TelaJogo t = new TelaJogo(Dificuldade.DIFICIL, jogador.getNome());
+						TelaJogo t = new TelaJogo(Dificuldade.DIFICIL);
 						t.setVisible(true);
 						dispose();
 						return;
@@ -184,10 +225,8 @@ public class TelaJogo extends JFrame {
 					revelarEspacosInterface(true);
 					timer.cancel();
 					
-					ranking = new Ranking(jogador, mapa.getDificuldade());
-					
 					JOptionPane.showMessageDialog(null, jogador.getNome() +  ", Você perdeu !! ");
-				dispose();
+					dispose();
 					TelaMenu menu = new TelaMenu();
 					menu.setVisible(true);
 					
@@ -196,7 +235,12 @@ public class TelaJogo extends JFrame {
 				ajustarLetra(i, j);
 
 				if (getMapa().verificarGanhouJogo() == true) {
+					
 					timer.cancel();
+					
+					string = JOptionPane.showInputDialog(null, "Digite seu nome: ", "Vitória", 1);
+					
+					jogador.setNome(string);
 					
 					ranking = new Ranking(jogador, mapa.getDificuldade());
 					
@@ -207,6 +251,7 @@ public class TelaJogo extends JFrame {
 					
 					
 				}
+								
 				
 			}
 
@@ -225,8 +270,6 @@ public class TelaJogo extends JFrame {
 							&& getMapa().getCelula(i, j).isVisivel()) {
 						matrizBotao[i][j].setText(Integer.toString(getMapa().getCelula(i, j).getQtdBombasVizinhas()));
 					}
-					
-					
 					
 					ajustarLetra(i, j);
 				} else {
@@ -338,20 +381,20 @@ public class TelaJogo extends JFrame {
 							if( (mapa.getCelula(i, j).getQtdBombasVizinhas() == mapa.getCelula(i, j).getNumCelulasVizinhasInviziveis()) 
 									&& mapa.getCelula(i2, j2).isBandeira() == false  
 									&& mapa.getCelula(i2, j2).isVisivel() == false 
-									&& mapa.getCelula(i, j).isVisivel()) {
+									&& mapa.getCelula(i, j).isVisivel() ) {
 								
 								getMapa().getCelula(i2, j2).setBandeira(true);
 								getMatrizBotao(i2, j2).setIcon(new ImageIcon(".\\images\\Bandeira_luffy.png"));
 								getMatrizBotao(i2, j2).setEnabled(false);
 								lblTempo.setText("Bombas: " + Integer.toString(contadorBandeiras()));
-							
+								
 							}
 						}
 					}
 				}
 			}
 		}
-		revelarEspacosInterface(false);
+		
 		
 	}
 	
@@ -362,21 +405,16 @@ public class TelaJogo extends JFrame {
 				for (int i2 = (i - 1); i2 <= (i + 1); i2++) { // LOOP PARA VARRER OS ARREDORES DA CASA A SER ANALISADA
 					for (int j2 = (j - 1); j2 <= (j + 1); j2++) {
 						if(i2 >= 0 && j2 >= 0 && i2 < matrizBotao.length && j2 < matrizBotao.length) {
-							if(mapa.getCelula(i, j).getQtdBombasVizinhas() == mapa.getCelula(i, j).getNumCelulasVizinhasComBandeira()) {
+							if( (mapa.getCelula(i, j).getQtdBombasVizinhas() == mapa.getCelula(i, j).getNumCelulasVizinhasComBandeira())
+									&& mapa.getCelula(i, j).isVisivel()
+									&& ( mapa.getCelula(i, j).getNumCelulasVizinhasComBandeira() <= (8 - mapa.getCelula(i, j).getNumCelulasVizinhasInviziveis())) ) {
 								
-								if(mapa.getCelula(i2, j2).isBandeira() == false && mapa.getCelula(i2, j2).isVisivel() == false  && mapa.getCelula(i2, j2).isBomba() == false) {
+								if(mapa.getCelula(i2, j2).isBandeira() == false && mapa.getCelula(i2, j2).isVisivel() == false) {
 									
 									mapa.escolherPosicao(i2,j2);
 									
-									if (mapa.getCelula(i2, j2).isEmBranco()) {
-										matrizBotao[i2][j2].setBackground(Color.BLACK);
-									} 
-									
-									else if (mapa.getCelula(i2, j2).getQtdBombasVizinhas() > 0) {
-										matrizBotao[i2][j2].setText(Integer.toString(getMapa().getCelula(i2, j2).getQtdBombasVizinhas()));
-									}
-									
 									revelarEspacosInterface(false);
+									
 								}
 							}
 						}
@@ -392,5 +430,21 @@ public class TelaJogo extends JFrame {
 
 	public JButton getMatrizBotao(int i, int j) {
 		return matrizBotao[i][j];
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getString() {
+		return string;
+	}
+
+	public void setString(String string) {
+		this.string = string;
 	}
 }

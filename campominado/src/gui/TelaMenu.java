@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,12 +17,14 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.com.poli.campoMinado.Dificuldade;
+import br.com.poli.campoMinado.Jogador;
 
 
 public class TelaMenu extends JFrame {
 
 	private JPanel contentPane;
 	
+	private TelaRanking telaRanking;
 	
 	protected TelaJogo tela;
 	
@@ -67,11 +70,6 @@ public class TelaMenu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		text = new JTextField();
-		
-		text.setBounds(267,338,134,63);
-		text.setColumns(10);
-		contentPane.add(text);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -90,31 +88,17 @@ public class TelaMenu extends JFrame {
 		gerarMapas(comboBox,btnNewButton);
 		
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(267, 423, 134, 63);
+		btnNewButton.setBounds(267, 300, 134, 63);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("RANKING");
+		
+		gerarRanking(comboBox,btnNewButton_1);
+		btnNewButton_1.setMargin(new Insets(0,0,0,0));
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1.setBounds(267, 587, 134, 63);
+		btnNewButton_1.setBounds(267, 400, 134, 63);
 		contentPane.add(btnNewButton_1);
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Ranking ranking = new Ranking();
-				
-			}
-		});
-		
-		
-		lblDigiteSeuNome = new JLabel("Digite seu nome");
-		lblDigiteSeuNome.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDigiteSeuNome.setBounds(267, 301, 134, 31);
-		contentPane.add(lblDigiteSeuNome);
-		
-		JButton botaoIa = new JButton("IA");
-		botaoIa.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		botaoIa.setBounds(267, 509, 134, 53);
-		contentPane.add(botaoIa);
 		
 	}
 	
@@ -125,19 +109,19 @@ public class TelaMenu extends JFrame {
 				switch(cmb.getSelectedIndex()) {
 				
 					case 0 : 
-						tela = new TelaJogo(Dificuldade.FACIL, text.getText());
+						tela = new TelaJogo(Dificuldade.FACIL);
 						tela.setVisible(true);
 						dispose();
 						break;
 						
 					case 1 : 
-						tela = new TelaJogo(Dificuldade.MEDIO, text.getText());
+						tela = new TelaJogo(Dificuldade.MEDIO);
 						tela.setVisible(true);
 						dispose();
 						break;
 						
 					case 2 : 
-						tela = new TelaJogo(Dificuldade.DIFICIL, text.getText());
+						tela = new TelaJogo(Dificuldade.DIFICIL);
 						tela.setVisible(true);
 						dispose();
 						break;
@@ -145,6 +129,34 @@ public class TelaMenu extends JFrame {
 			}
 		});
 	}
+	
+	public void gerarRanking(JComboBox cmb, JButton botao) {
+		botao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				switch(cmb.getSelectedIndex()) {
+				
+					case 0 : 
+						telaRanking = new TelaRanking(Dificuldade.FACIL);
+						telaRanking.setVisible(true);
+						dispose();
+						return;
+					case 1 : 
+						telaRanking = new TelaRanking(Dificuldade.MEDIO);
+						telaRanking.setVisible(true);
+						dispose();
+						return;
+						
+					case 2 : 
+						telaRanking = new TelaRanking(Dificuldade.DIFICIL);
+						telaRanking.setVisible(true);
+						dispose();
+						return;
+				}
+			}
+		});
+	}
+	
 	
 	public TelaJogo getTela() {
 		return tela;

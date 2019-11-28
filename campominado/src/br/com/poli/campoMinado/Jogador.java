@@ -11,20 +11,16 @@ public class Jogador {
 	private int tempo;
 	
 	//CONSTRUTOR
+	public Jogador() {
+		
+	}
 	
-	
+	public Jogador (String nome) {
+		this.nome = nome;
+	}
 	public Jogador(String nome, int tempo) {
 		this.nome = nome;
 		this.tempo = tempo;
-	}
-	
-	public Jogador(String nome) {
-		this.nome = nome;
-		
-	}
-	
-	public Jogador() {
-		
 	}
 	
 	//MÉTODOS
