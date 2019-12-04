@@ -87,61 +87,34 @@ public class Ranking {
 
 			if (dificuldade == Dificuldade.FACIL) {
 				file = new File("RankingFacil.txt");
-				
-				file.createNewFile();
-				
-				fileR = new FileReader(file);
-				
-				fileR2 =new FileReader(file);
-				
-				fileF = new FileWriter(file.getAbsoluteFile(), true);
-				
-				pr = new PrintWriter(fileF);
-
-				for (int i = 0; i < listaJogadores.size(); i++) {
-					pr.println(listaJogadores.get(i).getNome() + "\n" + listaJogadores.get(i).getTempo());
-				}
-				
-				fileF.close();
 
 			}
 
 			else if (dificuldade == Dificuldade.MEDIO) {
 				file = new File("RankingMedio.txt");
 				
-				fileR = new FileReader(file);
-				
-				fileR2 =new FileReader(file);
-				
-				fileF = new FileWriter(file.getAbsoluteFile(), true);
-				
-				pr = new PrintWriter(fileF);
-
-				for (int i = 0; i < listaJogadores.size(); i++) {
-					pr.println(listaJogadores.get(i).getNome() + "\n" + listaJogadores.get(i).getTempo());
-				}
-				
-				fileF.close();
 			}
 
 			else if (dificuldade == Dificuldade.DIFICIL) {
 				file = new File("RankingDificil.txt");
 				
-				file.createNewFile();
-				
-				fileR = new FileReader(file);
-				
-				fileR2 =new FileReader(file);
-				
-				fileF = new FileWriter(file.getAbsoluteFile(), true);
-				
-				pr = new PrintWriter(fileF);
-
-				for (int i = 0; i < listaJogadores.size(); i++) {
-					pr.println(listaJogadores.get(i).getNome() + "\n" + listaJogadores.get(i).getTempo());
-				}
-				fileF.close();
 			}
+			
+			file.createNewFile();
+			
+			fileR = new FileReader(file);
+			
+			fileR2 =new FileReader(file);
+			
+			fileF = new FileWriter(file.getAbsoluteFile(), true);
+			
+			pr = new PrintWriter(fileF);
+
+			for (int i = 0; i < listaJogadores.size(); i++) {
+				pr.println(listaJogadores.get(i).getNome() + "\n" + listaJogadores.get(i).getTempo());
+			}
+			
+			fileF.close();
 			
 
 		} catch (IOException e) {
@@ -187,6 +160,7 @@ public class Ranking {
 			for (int i = 0; i < arrayj.length; i++) {
 				this.listaJogNova.add(arrayj[i]);
 			}
+			
 			this.contador = 0;
 			this.contador2 = 0;
 		}

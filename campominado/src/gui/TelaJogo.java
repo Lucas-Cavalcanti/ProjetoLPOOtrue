@@ -33,7 +33,7 @@ public class TelaJogo extends JFrame {
 	
 	@SuppressWarnings("unused")
 	private Ranking ranking;
-
+	
 	private JButton matrizBotao[][];
 
 	private Mapa mapa;
@@ -126,7 +126,9 @@ public class TelaJogo extends JFrame {
 		
 		btnSelecionarCelulasAuto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				getMapa().contarVizinhosComBandeira();
+				
 				selecionarCelulasAuto();
 				
 				if (getMapa().verificarGanhouJogo() == true) {
@@ -220,7 +222,7 @@ public class TelaJogo extends JFrame {
 					revelarEspacosInterface(true);
 					timer.cancel();
 					
-					JOptionPane.showMessageDialog(null, jogador.getNome() +  ", Você perdeu !! ");
+					JOptionPane.showMessageDialog(null,"Você perdeu !! ");
 					dispose();
 					TelaMenu menu = new TelaMenu();
 					menu.setVisible(true);
@@ -260,6 +262,12 @@ public class TelaJogo extends JFrame {
 
 				if (teste == false) {
 					if (mapa.getCelula(i, j).isEmBranco() && getMapa().getCelula(i, j).isVisivel()) {
+						
+						if(mapa.getCelula(i, j).isBandeira()) {
+							mapa.getCelula(i, j).setBandeira(false);
+							matrizBotao[i][j].setEnabled(true);
+						}
+						
 						matrizBotao[i][j].setBackground(Color.BLACK);
 					} else if (mapa.getCelula(i, j).getQtdBombasVizinhas() > 0
 							&& getMapa().getCelula(i, j).isVisivel()) {
@@ -402,7 +410,7 @@ public class TelaJogo extends JFrame {
 						if(i2 >= 0 && j2 >= 0 && i2 < matrizBotao.length && j2 < matrizBotao.length) {
 							if( (mapa.getCelula(i, j).getQtdBombasVizinhas() == mapa.getCelula(i, j).getNumCelulasVizinhasComBandeira())
 									&& mapa.getCelula(i, j).isVisivel()
-									&& ( mapa.getCelula(i, j).getNumCelulasVizinhasComBandeira() <= (8 - mapa.getCelula(i, j).getNumCelulasVizinhasInviziveis())) ) {
+									&& ( mapa.getCelula(i, j).getNumCelulasVizinhasComBandeira() <= (8 - mapa.getCelula(i, j).getNumCelulasVizinhasInviziveis() )) ) {
 								
 								if(mapa.getCelula(i2, j2).isBandeira() == false && mapa.getCelula(i2, j2).isVisivel() == false) {
 									

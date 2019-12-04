@@ -1,8 +1,4 @@
-AAA
-2
-GGGGG
-2
-LLLLLL
-2
-uhul
-12
+Bruno
+52
+Arthur
+62

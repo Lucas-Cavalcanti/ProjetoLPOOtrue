@@ -54,8 +54,6 @@ public class TelaRanking extends JFrame {
 		lblNewLabel.setBounds(27, 188, 619, 101);
 		contentPane.add(lblNewLabel);
 		
-		
-		
 		criarLabels();
 		
 	}
@@ -65,7 +63,7 @@ public class TelaRanking extends JFrame {
 		for (int i = 0; i < ranking.getListaJogNova().size(); i++) {
 			if( i<5 ) {
 				jl[i] = new JLabel(Integer.toString(i+1) + ") Nome :" + ranking.getListaJogNova().get(i).getNome() + "   Tempo : " + Integer.toString(ranking.getListaJogNova().get(i).getTempo()) + " Segundos  ");
-				jl[i].setFont(new Font("Tahoma", Font.PLAIN, 18));
+				jl[i].setFont(new Font("Tahoma", Font.BOLD, 18));
 				jl[i].setBounds(27, (180 + (50*i+1)), 700, 100);
 				contentPane.add(jl[i]);
 			}
